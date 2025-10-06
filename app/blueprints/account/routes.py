@@ -1,9 +1,23 @@
-from flask import render_template, redirect, url_for, flash, request
+from flask import render_template, redirect, url_for, flash, request, current_app
 from flask_login import login_required, current_user, logout_user
 from ...extensions import db
 from ...models import BillingProfile, User
 from .forms import ChangePasswordForm, BillingForm, DeleteAccountForm
 from . import bp
+from flask_babel import _
+
+@bp.route('/language', methods=['GET', 'POST'])
+@login_required
+def change_language():
+    if request.method == 'POST':
+        language = request.form.get('language')
+        if language in current_app.config['BABEL_SUPPORTED_LOCALES']:
+            current_user.language = language
+            db.session.commit()
+            flash(_('Language updated successfully'), 'success')
+        return redirect(url_for('account.overview'))
+    
+    return render_template('account/language.html')
 
 @bp.get("/")
 @login_required

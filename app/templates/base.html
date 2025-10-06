@@ -24,6 +24,15 @@
 {% endif %}
 </ul>
           <ul class="navbar-nav">
+		  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">
+        {% if current_user.language == 'de' %}🇩🇪 Deutsch{% else %}🇬🇧 English{% endif %}
+    </a>
+    <ul class="dropdown-menu">
+        <li><a class="dropdown-item" href="{{ url_for('account.change_language') }}?lang=en">🇬🇧 English</a></li>
+        <li><a class="dropdown-item" href="{{ url_for('account.change_language') }}?lang=de">🇩🇪 Deutsch</a></li>
+    </ul>
+</li>
             {% if current_user.is_authenticated %}
               <li class="nav-item"><a class="nav-link" href="{{ url_for('main.profile') }}">Profile</a></li>
               <li class="nav-item"><a class="nav-link" href="{{ url_for('account.overview') }}">Account</a></li>

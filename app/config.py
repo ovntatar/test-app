@@ -1,5 +1,11 @@
 import os
 
+class Config:
+    # Existing config...
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_SUPPORTED_LOCALES = ['en', 'de']
+    BABEL_TRANSLATION_DIRECTORIES = 'translations'
+
 class BaseConfig:
     SECRET_KEY = os.getenv("SECRET_KEY", "dev-insecure")
     SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///dev.sqlite3")

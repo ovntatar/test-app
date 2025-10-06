@@ -4,6 +4,8 @@ from flask import Flask
 from .config import DevelopmentConfig, ProductionConfig, TestingConfig
 from .extensions import db, migrate, login_mgr
 from .models import User
+from flask_babel import Babel
+
 
 # --- SQLite-Fallback, falls _sqlite3 fehlt ---
 try:
@@ -14,6 +16,16 @@ except ModuleNotFoundError:
     sys.modules["sqlite3"] = sqlite3
     sys.modules["_sqlite3"] = sqlite3
 # ---------------------------------------------
+
+def get_locale():
+    # Check if user is logged in and has language preference
+    from flask_login import current_user
+    if current_user.is_authenticated and hasattr(current_user, 'language'):
+        return current_user.language
+    # Otherwise use browser preference or default
+    from flask import current_app
+    return request.accept_languages.best_match(current_app.config['BABEL_SUPPORTED_LOCALES'])
+
 
 def _resolve_config(name: str):
     return {
@@ -26,8 +38,9 @@ def create_app(config_class=None):
     app = Flask(__name__, instance_relative_config=True)
     register_context_processors(app)
 
-
-
+    # Initialize Babel
+    babel = Babel(app, locale_selector=get_locale)
+   
 
     try:
         from dotenv import load_dotenv
