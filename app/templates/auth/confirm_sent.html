@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8">
+    <div class="alert alert-info">
+      If this were production, we'd email you a link. In development, we show it here.
+    </div>
+    {% if confirm_link %}
+      <div class="card">
+        <div class="card-body">
+          <h2 class="h5">Your link</h2>
+          <p class="mb-0"><a href="{{ confirm_link }}">{{ confirm_link }}</a></p>
+        </div>
+      </div>
+    {% else %}
+      <p>Check your inbox.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row g-4">
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Security</h2>
+        <p>Change your password.</p>
+        <a class="btn btn-outline-primary" href="{{ url_for('account.change_password') }}">Change password</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h2 class="h5 mb-3">Billing</h2>
+        {% if billing %}
+          <p class="mb-1"><strong>{{ billing.full_name or "-" }}</strong> {% if billing.company %}— {{ billing.company }}{% endif %}</p>
+          <p class="mb-1">{{ billing.address1 }} {{ billing.address2 or "" }}</p>
+          <p class="mb-1">{{ billing.postal_code }} {{ billing.city }}{% if billing.state %}, {{ billing.state }}{% endif %}</p>
+          <p class="mb-1">{{ billing.country }}{% if billing.tax_id %} • Tax/VAT: {{ billing.tax_id }}{% endif %}</p>
+        {% else %}
+          <p>No billing details yet.</p>
+        {% endif %}
+        <a class="btn btn-outline-secondary" href="{{ url_for('account.billing') }}">Edit billing</a>
+      </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <div class="card border-danger">
+      <div class="card-body">
+        <h2 class="h5 text-danger">Danger zone</h2>
+        <p>Delete your account and all associated data.</p>
+        <a class="btn btn-danger" href="{{ url_for('account.delete_account') }}">Delete account</a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

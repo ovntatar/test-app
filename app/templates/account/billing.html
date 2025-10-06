@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-md-8 col-lg-7">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <h1 class="h5 mb-3">Billing details</h1>
+        <form method="post" novalidate>
+          {{ form.csrf_token }}
+          <div class="row g-3">
+            <div class="col-md-6">
+              {{ form.full_name.label(class="form-label") }}
+              {{ form.full_name(class="form-control") }}
+            </div>
+            <div class="col-md-6">
+              {{ form.company.label(class="form-label") }}
+              {{ form.company(class="form-control") }}
+            </div>
+            <div class="col-12">
+              {{ form.address1.label(class="form-label") }}
+              {{ form.address1(class="form-control") }}
+            </div>
+            <div class="col-12">
+              {{ form.address2.label(class="form-label") }}
+              {{ form.address2(class="form-control") }}
+            </div>
+            <div class="col-md-4">
+              {{ form.postal_code.label(class="form-label") }}
+              {{ form.postal_code(class="form-control") }}
+            </div>
+            <div class="col-md-4">
+              {{ form.city.label(class="form-label") }}
+              {{ form.city(class="form-control") }}
+            </div>
+            <div class="col-md-4">
+              {{ form.state.label(class="form-label") }}
+              {{ form.state(class="form-control") }}
+            </div>
+            <div class="col-md-4">
+              {{ form.country.label(class="form-label") }}
+              {{ form.country(class="form-control", placeholder="DE") }}
+            </div>
+            <div class="col-md-8">
+              {{ form.tax_id.label(class="form-label") }}
+              {{ form.tax_id(class="form-control", placeholder="VAT ID") }}
+            </div>
+          </div>
+          <div class="d-grid mt-3">
+            {{ form.submit(class="btn btn-primary") }}
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
