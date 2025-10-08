@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from ...extensions import db
-from ...models import User
+from ...models import User, BillingProfile
 from ...security import roles_required
 from .forms import UserForm, AddUserForm
 from . import bp
@@ -154,3 +154,41 @@ def toggle_user_status(user_id):
     flash(_('User %(email)s has been %(status)s', email=user.email, status=status), 'success')
     
     return redirect(url_for('admin.index'))
+
+@bp.route('/users/<int:user_id>/billing', methods=['GET', 'POST'])
+@login_required
+@roles_required('admin')
+def edit_user_billing(user_id):
+    """Edit user's billing information"""
+    user = User.query.get_or_404(user_id)
+    
+    # Get or create billing profile
+    billing = user.billing or BillingProfile(user=user)
+    
+    from .forms import AdminBillingForm
+    form = AdminBillingForm(obj=billing)
+    
+    if form.validate_on_submit():
+        form.populate_obj(billing)
+        db.session.add(billing)
+        db.session.commit()
+        flash(_('Billing details updated for %(email)s', email=user.email), 'success')
+        return redirect(url_for('admin.edit_user', user_id=user_id))
+    
+    return render_template('admin/edit_billing.html', form=form, user=user, billing=billing)
+
+@bp.route('/users/<int:user_id>/billing/clear', methods=['POST'])
+@login_required
+@roles_required('admin')
+def clear_user_billing(user_id):
+    """Clear user's billing information"""
+    user = User.query.get_or_404(user_id)
+    
+    if user.billing:
+        db.session.delete(user.billing)
+        db.session.commit()
+        flash(_('Billing details cleared for %(email)s', email=user.email), 'success')
+    else:
+        flash(_('No billing details to clear'), 'info')
+    
+    return redirect(url_for('admin.edit_user_billing', user_id=user_id))

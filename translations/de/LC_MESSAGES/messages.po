@@ -263,3 +263,55 @@ msgstr "deaktiviert"
 
 msgid "User %(email)s has been %(status)s"
 msgstr "Benutzer %(email)s wurde %(status)s"
+
+# Admin - Billing
+msgid "Edit Billing Details"
+msgstr "Rechnungsdaten bearbeiten"
+
+msgid "Edit Billing"
+msgstr "Rechnungsdaten"
+
+msgid "Back to User"
+msgstr "Zurück zum Benutzer"
+
+msgid "Current Billing Information"
+msgstr "Aktuelle Rechnungsinformationen"
+
+msgid "Tax/VAT"
+msgstr "Steuer/MwSt"
+
+msgid "Billing Contact"
+msgstr "Rechnungskontakt"
+
+msgid "Address"
+msgstr "Adresse"
+
+msgid "Tax Information"
+msgstr "Steuerinformationen"
+
+msgid "ISO 2-letter code (e.g., DE, US, FR)"
+msgstr "ISO 2-Buchstaben-Code (z.B. DE, US, FR)"
+
+msgid "VAT ID or Tax Number"
+msgstr "USt-IdNr. oder Steuernummer"
+
+msgid "Back to User List"
+msgstr "Zurück zur Benutzerliste"
+
+msgid "Clear Billing Data"
+msgstr "Rechnungsdaten löschen"
+
+msgid "Clear all billing information for this user?"
+msgstr "Alle Rechnungsinformationen für diesen Benutzer löschen?"
+
+msgid "Billing details updated for %(email)s"
+msgstr "Rechnungsdaten für %(email)s aktualisiert"
+
+msgid "Billing details cleared for %(email)s"
+msgstr "Rechnungsdaten für %(email)s gelöscht"
+
+msgid "No billing details to clear"
+msgstr "Keine Rechnungsdaten zum Löschen vorhanden"
+
+msgid "Save Billing Details"
+msgstr "Rechnungsdaten speichern"
