@@ -60,9 +60,16 @@ def login():
         if not user or not user.check_password(form.password.data):
             flash("Invalid email or password.", "danger")
             return render_template("auth/login.html", form=form)
+        
+        # Check if user is active
+        if not user.is_active:
+            flash("Your account has been disabled. Please contact support.", "danger")
+            return render_template("auth/login.html", form=form)
+        
         if not user.is_confirmed:
             flash("Please confirm your email first.", "warning")
             return redirect(url_for(".resend_confirmation", email=user.email))
+        
         login_user(user, remember=True)
         flash("Welcome back!", "success")
         next_url = request.args.get("next") or url_for("main.profile")

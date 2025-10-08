@@ -13,6 +13,9 @@ class User(UserMixin, db.Model):
     password_hash = db.Column(db.String(255), nullable=False)
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     confirmed_at = db.Column(db.DateTime, nullable=True)
+    
+    # New field for enable/disable functionality
+    is_active = db.Column(db.Boolean, default=True, nullable=False, index=True)
 
     # Relationship: one-to-one billing profile
     billing = db.relationship("BillingProfile", uselist=False, back_populates="user", cascade="all, delete-orphan")
@@ -29,3 +32,18 @@ class User(UserMixin, db.Model):
 
     def confirm(self):
         self.confirmed_at = datetime.utcnow()
+    
+    # Override Flask-Login's is_active property
+    def get_id(self):
+        """Required by Flask-Login"""
+        return str(self.id)
+    
+    @property
+    def is_authenticated(self):
+        """Required by Flask-Login"""
+        return True
+    
+    @property
+    def is_anonymous(self):
+        """Required by Flask-Login"""
+        return False

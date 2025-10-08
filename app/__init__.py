@@ -80,6 +80,10 @@ def create_app(config_class=None):
     from .blueprints.account import bp as account_bp
     app.register_blueprint(account_bp, url_prefix="/account")
 
+    # Admin blueprint - NEW
+    from .blueprints.admin import bp as admin_bp
+    app.register_blueprint(admin_bp, url_prefix="/admin")
+
     # Health check
     @app.get("/healthz")
     def healthz():

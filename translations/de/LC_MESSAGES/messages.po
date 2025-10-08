@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-06 18:40+0200\n"
-"PO-Revision-Date: 2025-10-06 18:40+0200\n"
+"POT-Creation-Date: 2025-10-08 12:00+0200\n"
+"PO-Revision-Date: 2025-10-08 12:00+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
@@ -18,23 +18,34 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.17.0\n"
 
-#: app/blueprints/account/routes.py:17
+# Language settings
 msgid "Language updated successfully"
-msgstr ""
+msgstr "Sprache erfolgreich aktualisiert"
 
-#: app/templates/account/language.html:5
 msgid "Language Settings"
-msgstr ""
+msgstr "Spracheinstellungen"
 
-#: app/templates/account/language.html:8
 msgid "Select Language"
-msgstr ""
+msgstr "Sprache auswählen"
 
+msgid "Choose your preferred language for the interface"
+msgstr "Wählen Sie Ihre bevorzugte Sprache für die Benutzeroberfläche"
+
+msgid "Save Language"
+msgstr "Sprache speichern"
+
+msgid "Back to Account"
+msgstr "Zurück zum Konto"
+
+# Navigation
 msgid "Welcome"
 msgstr "Willkommen"
 
 msgid "Home"
 msgstr "Startseite"
+
+msgid "About"
+msgstr "Über uns"
 
 msgid "Profile"
 msgstr "Profil"
@@ -45,3 +56,210 @@ msgstr "Konto"
 msgid "Logout"
 msgstr "Abmelden"
 
+# Account settings
+msgid "Security"
+msgstr "Sicherheit"
+
+msgid "Change your password"
+msgstr "Ändern Sie Ihr Passwort"
+
+msgid "Change password"
+msgstr "Passwort ändern"
+
+msgid "Language"
+msgstr "Sprache"
+
+msgid "Current language"
+msgstr "Aktuelle Sprache"
+
+msgid "Change language"
+msgstr "Sprache ändern"
+
+msgid "Billing"
+msgstr "Rechnungsdaten"
+
+msgid "No billing details yet"
+msgstr "Noch keine Rechnungsdaten vorhanden"
+
+msgid "Edit billing"
+msgstr "Rechnungsdaten bearbeiten"
+
+msgid "Danger zone"
+msgstr "Gefahrenzone"
+
+msgid "Delete your account and all associated data"
+msgstr "Löschen Sie Ihr Konto und alle zugehörigen Daten"
+
+msgid "Delete account"
+msgstr "Konto löschen"
+
+msgid "Current password is incorrect."
+msgstr "Das aktuelle Passwort ist falsch."
+
+msgid "Password updated."
+msgstr "Passwort aktualisiert."
+
+msgid "Billing details saved."
+msgstr "Rechnungsdaten gespeichert."
+
+msgid "Please type DELETE to confirm."
+msgstr "Bitte geben Sie DELETE ein, um zu bestätigen."
+
+msgid "Your account has been deleted."
+msgstr "Ihr Konto wurde gelöscht."
+
+# Admin - User Management
+msgid "User Management"
+msgstr "Benutzerverwaltung"
+
+msgid "Add User"
+msgstr "Benutzer hinzufügen"
+
+msgid "Search by email..."
+msgstr "Nach E-Mail suchen..."
+
+msgid "Search"
+msgstr "Suchen"
+
+msgid "ID"
+msgstr "ID"
+
+msgid "Email"
+msgstr "E-Mail"
+
+msgid "Role"
+msgstr "Rolle"
+
+msgid "Status"
+msgstr "Status"
+
+msgid "Confirmed"
+msgstr "Bestätigt"
+
+msgid "Created"
+msgstr "Erstellt"
+
+msgid "Actions"
+msgstr "Aktionen"
+
+msgid "You"
+msgstr "Sie"
+
+msgid "Admin"
+msgstr "Administrator"
+
+msgid "User"
+msgstr "Benutzer"
+
+msgid "Active"
+msgstr "Aktiv"
+
+msgid "Disabled"
+msgstr "Deaktiviert"
+
+msgid "Edit"
+msgstr "Bearbeiten"
+
+msgid "Disable"
+msgstr "Deaktivieren"
+
+msgid "Enable"
+msgstr "Aktivieren"
+
+msgid "Delete"
+msgstr "Löschen"
+
+msgid "Are you sure?"
+msgstr "Sind Sie sicher?"
+
+msgid "Are you sure you want to delete this user?"
+msgstr "Möchten Sie diesen Benutzer wirklich löschen?"
+
+msgid "Cannot modify yourself"
+msgstr "Sie können sich selbst nicht ändern"
+
+msgid "Previous"
+msgstr "Zurück"
+
+msgid "Next"
+msgstr "Weiter"
+
+msgid "Showing"
+msgstr "Zeige"
+
+msgid "of"
+msgstr "von"
+
+msgid "users"
+msgstr "Benutzern"
+
+msgid "No users found"
+msgstr "Keine Benutzer gefunden"
+
+msgid "Clear search"
+msgstr "Suche löschen"
+
+# Admin - Add User
+msgid "Add New User"
+msgstr "Neuen Benutzer hinzufügen"
+
+msgid "Back to List"
+msgstr "Zurück zur Liste"
+
+msgid "User can login when active"
+msgstr "Benutzer kann sich anmelden wenn aktiv"
+
+msgid "Skip email confirmation"
+msgstr "E-Mail-Bestätigung überspringen"
+
+msgid "Cancel"
+msgstr "Abbrechen"
+
+msgid "Email already exists"
+msgstr "E-Mail existiert bereits"
+
+msgid "User created successfully"
+msgstr "Benutzer erfolgreich erstellt"
+
+# Admin - Edit User
+msgid "Edit User"
+msgstr "Benutzer bearbeiten"
+
+msgid "Editing"
+msgstr "Bearbeite"
+
+msgid "You cannot remove your own admin role"
+msgstr "Sie können Ihre eigene Admin-Rolle nicht entfernen"
+
+msgid "Leave blank to keep current password"
+msgstr "Leer lassen, um aktuelles Passwort zu behalten"
+
+msgid "Email verification status"
+msgstr "E-Mail-Verifizierungsstatus"
+
+msgid "You cannot disable your own account"
+msgstr "Sie können Ihr eigenes Konto nicht deaktivieren"
+
+msgid "Account Created"
+msgstr "Konto erstellt"
+
+msgid "Last Status"
+msgstr "Letzter Status"
+
+msgid "User updated successfully"
+msgstr "Benutzer erfolgreich aktualisiert"
+
+msgid "You cannot delete your own account"
+msgstr "Sie können Ihr eigenes Konto nicht löschen"
+
+msgid "User %(email)s deleted successfully"
+msgstr "Benutzer %(email)s erfolgreich gelöscht"
+
+msgid "enabled"
+msgstr "aktiviert"
+
+msgid "disabled"
+msgstr "deaktiviert"
+
+msgid "User %(email)s has been %(status)s"
+msgstr "Benutzer %(email)s wurde %(status)s"
