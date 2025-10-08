@@ -1,6 +1,7 @@
 import os
 from .context_helpers import register_context_processors
 from flask import Flask
+from flask import render_template, redirect, url_for, flash, request, current_app
 from .config import DevelopmentConfig, ProductionConfig, TestingConfig
 from .extensions import db, migrate, login_mgr
 from .models import User
@@ -38,8 +39,6 @@ def create_app(config_class=None):
     app = Flask(__name__, instance_relative_config=True)
     register_context_processors(app)
 
-    # Initialize Babel
-    babel = Babel(app, locale_selector=get_locale)
    
 
     try:
@@ -54,6 +53,9 @@ def create_app(config_class=None):
 
     app.config.from_object(config_class)
     app.config.from_pyfile("config.py", silent=True)
+
+    babel = Babel()
+    babel.init_app(app, locale_selector=get_locale)
 
     # Init extensions
     db.init_app(app)
@@ -90,6 +92,22 @@ def create_app(config_class=None):
     @roles_required("admin")
     def check_admin():
         return "You are an admin!"
+
+    @app.route('/debug-locale')
+    def debug_locale():
+        from flask_login import current_user
+        from flask_babel import get_locale
+    
+        info = {
+            'authenticated': current_user.is_authenticated,
+            'has_language_attr': hasattr(current_user, 'language') if current_user.is_authenticated else False,
+            'user_language': current_user.language if current_user.is_authenticated else None,
+            'detected_locale': str(get_locale()),
+            'config_locales': current_app.config.get('BABEL_SUPPORTED_LOCALES')
+        }
+        return info
+
+
 
     # Dev convenience: auto-create tables if none exist
     if app.config.get("ENV") == "development":

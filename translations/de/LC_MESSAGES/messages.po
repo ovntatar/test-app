@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-06 18:07+0200\n"
-"PO-Revision-Date: 2025-10-06 18:07+0200\n"
+"POT-Creation-Date: 2025-10-06 18:40+0200\n"
+"PO-Revision-Date: 2025-10-06 18:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
@@ -29,4 +29,19 @@ msgstr ""
 #: app/templates/account/language.html:8
 msgid "Select Language"
 msgstr ""
+
+msgid "Welcome"
+msgstr "Willkommen"
+
+msgid "Home"
+msgstr "Startseite"
+
+msgid "Profile"
+msgstr "Profil"
+
+msgid "Account"
+msgstr "Konto"
+
+msgid "Logout"
+msgstr "Abmelden"
 

@@ -1,5 +1,6 @@
 import os
 
+
 class Config:
     # Existing config...
     BABEL_DEFAULT_LOCALE = 'en'
@@ -16,6 +17,11 @@ class BaseConfig:
 
     SESSION_COOKIE_SECURE = False
     REMEMBER_COOKIE_SECURE = False
+
+    # Babel i18n settings
+    BABEL_DEFAULT_LOCALE = 'en'
+    BABEL_SUPPORTED_LOCALES = ['en', 'de']
+    BABEL_TRANSLATION_DIRECTORIES = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'translations')
 
 class DevelopmentConfig(BaseConfig):
     DEBUG = True
