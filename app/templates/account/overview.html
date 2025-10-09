@@ -14,6 +14,19 @@
   <div class="col-12 col-lg-6">
     <div class="card shadow-sm">
       <div class="card-body">
+        <h2 class="h5 mb-3">{{ _('Your Plan') }}</h2>
+        <p>
+          {{ _('Current plan') }}: 
+          <strong>{{ current_user.plan_name }}</strong>
+        </p>
+        <a class="btn btn-outline-primary" href="{{ url_for('account.view_plan') }}">{{ _('Manage Plan') }}</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="col-12 col-lg-6">
+    <div class="card shadow-sm">
+      <div class="card-body">
         <h2 class="h5 mb-3">{{ _('Language') }}</h2>
         <p>
           {{ _('Current language') }}: 

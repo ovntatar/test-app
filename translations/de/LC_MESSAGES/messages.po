@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2025-10-08 12:00+0200\n"
-"PO-Revision-Date: 2025-10-08 12:00+0200\n"
+"POT-Creation-Date: 2025-10-08 18:40+0200\n"
+"PO-Revision-Date: 2025-10-08 18:40+0200\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: de\n"
 "Language-Team: de <LL@li.org>\n"
@@ -55,6 +55,12 @@ msgstr "Konto"
 
 msgid "Logout"
 msgstr "Abmelden"
+
+msgid "Admin"
+msgstr "Administrator"
+
+msgid "Users"
+msgstr "Benutzer"
 
 # Account settings
 msgid "Security"
@@ -145,9 +151,6 @@ msgstr "Aktionen"
 msgid "You"
 msgstr "Sie"
 
-msgid "Admin"
-msgstr "Administrator"
-
 msgid "User"
 msgstr "Benutzer"
 
@@ -199,7 +202,6 @@ msgstr "Keine Benutzer gefunden"
 msgid "Clear search"
 msgstr "Suche löschen"
 
-# Admin - Add User
 msgid "Add New User"
 msgstr "Neuen Benutzer hinzufügen"
 
@@ -221,7 +223,6 @@ msgstr "E-Mail existiert bereits"
 msgid "User created successfully"
 msgstr "Benutzer erfolgreich erstellt"
 
-# Admin - Edit User
 msgid "Edit User"
 msgstr "Benutzer bearbeiten"
 
@@ -315,3 +316,60 @@ msgstr "Keine Rechnungsdaten zum Löschen vorhanden"
 
 msgid "Save Billing Details"
 msgstr "Rechnungsdaten speichern"
+
+# Plans
+msgid "Plan Management"
+msgstr "Planverwaltung"
+
+msgid "Add Plan"
+msgstr "Plan hinzufügen"
+
+msgid "Plans"
+msgstr "Pläne"
+
+msgid "Your Plan"
+msgstr "Ihr Plan"
+
+msgid "Current plan"
+msgstr "Aktueller Plan"
+
+msgid "Manage Plan"
+msgstr "Plan verwalten"
+
+msgid "Available Plans"
+msgstr "Verfügbare Pläne"
+
+msgid "Popular"
+msgstr "Beliebt"
+
+msgid "Current Plan"
+msgstr "Aktueller Plan"
+
+msgid "Select Plan"
+msgstr "Plan auswählen"
+
+msgid "Upgrade"
+msgstr "Upgrade"
+
+msgid "Downgrade"
+msgstr "Downgrade"
+
+msgid "Cancel Plan"
+msgstr "Plan kündigen"
+
+msgid "Cancel your subscription?"
+msgstr "Ihr Abonnement kündigen?"
+
+msgid "Successfully switched to %(plan)s plan"
+msgstr "Erfolgreich zu %(plan)s Plan gewechselt"
+
+msgid "Successfully cancelled %(plan)s plan"
+msgstr "%(plan)s Plan erfolgreich gekündigt"
+
+msgid "Plan created successfully"
+msgstr "Plan erfolgreich erstellt"
+
+msgid "Plan updated successfully"
+msgstr "Plan erfolgreich aktualisiert"
+
+msgid "Plan with this name already exist

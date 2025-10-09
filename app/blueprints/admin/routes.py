@@ -1,7 +1,7 @@
 from flask import render_template, redirect, url_for, flash, request
 from flask_login import login_required, current_user
 from ...extensions import db
-from ...models import User, BillingProfile
+from ...models import User, BillingProfile, Plan
 from ...security import roles_required
 from .forms import UserForm, AddUserForm
 from . import bp
@@ -192,3 +192,136 @@ def clear_user_billing(user_id):
         flash(_('No billing details to clear'), 'info')
     
     return redirect(url_for('admin.edit_user_billing', user_id=user_id))
+
+# ============ PLAN MANAGEMENT ROUTES ============
+
+@bp.route('/plans')
+@login_required
+@roles_required('admin')
+def plans():
+    """List all plans"""
+    page = request.args.get('page', 1, type=int)
+    per_page = 20
+    
+    # Get all plans ordered by sort_order
+    pagination = Plan.query.order_by(Plan.sort_order.asc(), Plan.created_at.desc()).paginate(
+        page=page, per_page=per_page, error_out=False
+    )
+    
+    plans = pagination.items
+    
+    return render_template(
+        'admin/plans.html',
+        plans=plans,
+        pagination=pagination
+    )
+
+@bp.route('/plans/add', methods=['GET', 'POST'])
+@login_required
+@roles_required('admin')
+def add_plan():
+    """Add a new plan"""
+    from .forms import PlanForm
+    form = PlanForm()
+    
+    if form.validate_on_submit():
+        # Check if plan name already exists
+        if Plan.query.filter_by(name=form.name.data).first():
+            flash(_('Plan with this name already exists'), 'danger')
+            return render_template('admin/add_plan.html', form=form)
+        
+        # Create new plan
+        plan = Plan(
+            name=form.name.data,
+            description=form.description.data,
+            option1=form.option1.data,
+            option2=form.option2.data,
+            option3=form.option3.data,
+            option4=form.option4.data,
+            option5=form.option5.data,
+            price=form.price.data,
+            currency=form.currency.data,
+            billing_period=form.billing_period.data,
+            stripe_price_id=form.stripe_price_id.data,
+            stripe_product_id=form.stripe_product_id.data,
+            is_active=form.is_active.data,
+            is_featured=form.is_featured.data,
+            sort_order=form.sort_order.data
+        )
+        
+        db.session.add(plan)
+        db.session.commit()
+        
+        flash(_('Plan created successfully'), 'success')
+        return redirect(url_for('admin.plans'))
+    
+    return render_template('admin/add_plan.html', form=form)
+
+@bp.route('/plans/<int:plan_id>/edit', methods=['GET', 'POST'])
+@login_required
+@roles_required('admin')
+def edit_plan(plan_id):
+    """Edit an existing plan"""
+    plan = Plan.query.get_or_404(plan_id)
+    
+    from .forms import PlanForm
+    form = PlanForm(obj=plan)
+    
+    if form.validate_on_submit():
+        # Update plan
+        plan.name = form.name.data
+        plan.description = form.description.data
+        plan.option1 = form.option1.data
+        plan.option2 = form.option2.data
+        plan.option3 = form.option3.data
+        plan.option4 = form.option4.data
+        plan.option5 = form.option5.data
+        plan.price = form.price.data
+        plan.currency = form.currency.data
+        plan.billing_period = form.billing_period.data
+        plan.stripe_price_id = form.stripe_price_id.data
+        plan.stripe_product_id = form.stripe_product_id.data
+        plan.is_active = form.is_active.data
+        plan.is_featured = form.is_featured.data
+        plan.sort_order = form.sort_order.data
+        
+        db.session.commit()
+        flash(_('Plan updated successfully'), 'success')
+        return redirect(url_for('admin.plans'))
+    
+    return render_template('admin/edit_plan.html', form=form, plan=plan)
+
+@bp.route('/plans/<int:plan_id>/delete', methods=['POST'])
+@login_required
+@roles_required('admin')
+def delete_plan(plan_id):
+    """Delete a plan"""
+    plan = Plan.query.get_or_404(plan_id)
+    
+    # Check if any users are using this plan
+    user_count = plan.users.count()
+    if user_count > 0:
+        flash(_('Cannot delete plan: %(count)d users are subscribed to this plan', count=user_count), 'danger')
+        return redirect(url_for('admin.plans'))
+    
+    plan_name = plan.name
+    db.session.delete(plan)
+    db.session.commit()
+    
+    flash(_('Plan "%(name)s" deleted successfully', name=plan_name), 'success')
+    return redirect(url_for('admin.plans'))
+
+@bp.route('/plans/<int:plan_id>/toggle-status', methods=['POST'])
+@login_required
+@roles_required('admin')
+def toggle_plan_status(plan_id):
+    """Enable/disable a plan"""
+    plan = Plan.query.get_or_404(plan_id)
+    
+    plan.is_active = not plan.is_active
+    db.session.commit()
+    
+    status = _('enabled') if plan.is_active else _('disabled')
+    flash(_('Plan "%(name)s" has been %(status)s', name=plan.name, status=status), 'success')
+    
+    return redirect(url_for('admin.plans'))

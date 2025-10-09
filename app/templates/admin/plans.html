@@ -1,0 +1,172 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h3">{{ _('Plan Management') }}</h1>
+  <a href="{{ url_for('admin.add_plan') }}" class="btn btn-primary">
+    <i class="bi bi-plus-circle"></i> {{ _('Add Plan') }}
+  </a>
+</div>
+
+<!-- Plans List -->
+<div class="card">
+  <div class="card-body">
+    {% if plans %}
+      <div class="table-responsive">
+        <table class="table table-hover">
+          <thead>
+            <tr>
+              <th>{{ _('Order') }}</th>
+              <th>{{ _('Name') }}</th>
+              <th>{{ _('Price') }}</th>
+              <th>{{ _('Period') }}</th>
+              <th>{{ _('Features') }}</th>
+              <th>{{ _('Users') }}</th>
+              <th>{{ _('Status') }}</th>
+              <th>{{ _('Stripe ID') }}</th>
+              <th>{{ _('Actions') }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for plan in plans %}
+            <tr class="{% if not plan.is_active %}table-secondary{% endif %}">
+              <td>
+                <span class="badge bg-secondary">{{ plan.sort_order }}</span>
+              </td>
+              <td>
+                <strong>{{ plan.name }}</strong>
+                {% if plan.is_featured %}
+                  <span class="badge bg-warning text-dark">{{ _('Featured') }}</span>
+                {% endif %}
+                {% if plan.description %}
+                  <br><small class="text-muted">{{ plan.description[:50] }}{% if plan.description|length > 50 %}...{% endif %}</small>
+                {% endif %}
+              </td>
+              <td>
+                {% if plan.price == 0 %}
+                  <span class="badge bg-success">{{ _('Free') }}</span>
+                {% else %}
+                  <strong>{{ plan.currency }} {{ plan.price }}</strong>
+                {% endif %}
+              </td>
+              <td>
+                <small>{{ plan.billing_period }}</small>
+              </td>
+              <td>
+                <small>
+                  {% for feature in plan.features_list[:2] %}
+                    • {{ feature }}<br>
+                  {% endfor %}
+                  {% if plan.features_list|length > 2 %}
+                    <span class="text-muted">+{{ plan.features_list|length - 2 }} more</span>
+                  {% endif %}
+                </small>
+              </td>
+              <td>
+                <span class="badge bg-info">{{ plan.users.count() }}</span>
+              </td>
+              <td>
+                {% if plan.is_active %}
+                  <span class="badge bg-success">{{ _('Active') }}</span>
+                {% else %}
+                  <span class="badge bg-danger">{{ _('Disabled') }}</span>
+                {% endif %}
+              </td>
+              <td>
+                {% if plan.stripe_price_id %}
+                  <small class="text-muted">{{ plan.stripe_price_id[:20] }}...</small>
+                {% else %}
+                  <span class="text-muted">-</span>
+                {% endif %}
+              </td>
+              <td>
+                <div class="btn-group btn-group-sm" role="group">
+                  <!-- Edit Button -->
+                  <a href="{{ url_for('admin.edit_plan', plan_id=plan.id) }}" 
+                     class="btn btn-outline-primary" 
+                     title="{{ _('Edit') }}">
+                    <i class="bi bi-pencil"></i>
+                  </a>
+                  
+                  <!-- Toggle Status Button -->
+                  <form method="POST" action="{{ url_for('admin.toggle_plan_status', plan_id=plan.id) }}" style="display: inline;">
+                    <button type="submit" 
+                            class="btn btn-outline-{% if plan.is_active %}warning{% else %}success{% endif %}" 
+                            title="{% if plan.is_active %}{{ _('Disable') }}{% else %}{{ _('Enable') }}{% endif %}"
+                            onclick="return confirm('{{ _('Are you sure?') }}')">
+                      {% if plan.is_active %}
+                        <i class="bi bi-pause-circle"></i>
+                      {% else %}
+                        <i class="bi bi-play-circle"></i>
+                      {% endif %}
+                    </button>
+                  </form>
+                  
+                  <!-- Delete Button -->
+                  <form method="POST" action="{{ url_for('admin.delete_plan', plan_id=plan.id) }}" style="display: inline;">
+                    <button type="submit" 
+                            class="btn btn-outline-danger" 
+                            title="{{ _('Delete') }}"
+                            onclick="return confirm('{{ _('Delete this plan? This cannot be undone.') }}')">
+                      <i class="bi bi-trash"></i>
+                    </button>
+                  </form>
+                </div>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      {% if pagination.pages > 1 %}
+      <nav aria-label="Page navigation">
+        <ul class="pagination justify-content-center mb-0">
+          <li class="page-item {% if not pagination.has_prev %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('admin.plans', page=pagination.prev_num) if pagination.has_prev else '#' }}">
+              {{ _('Previous') }}
+            </a>
+          </li>
+          
+          {% for page_num in pagination.iter_pages(left_edge=1, right_edge=1, left_current=2, right_current=2) %}
+            {% if page_num %}
+              <li class="page-item {% if page_num == pagination.page %}active{% endif %}">
+                <a class="page-link" href="{{ url_for('admin.plans', page=page_num) }}">
+                  {{ page_num }}
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link">...</span>
+              </li>
+            {% endif %}
+          {% endfor %}
+          
+          <li class="page-item {% if not pagination.has_next %}disabled{% endif %}">
+            <a class="page-link" href="{{ url_for('admin.plans', page=pagination.next_num) if pagination.has_next else '#' }}">
+              {{ _('Next') }}
+            </a>
+          </li>
+        </ul>
+      </nav>
+      {% endif %}
+
+      <div class="text-center mt-3 text-muted">
+        <small>{{ _('Total') }}: {{ pagination.total }} {{ _('plans') }}</small>
+      </div>
+    {% else %}
+      <div class="text-center py-5">
+        <i class="bi bi-box-seam" style="font-size: 3rem; color: #ccc;"></i>
+        <p class="text-muted mt-3">{{ _('No plans yet') }}</p>
+        <a href="{{ url_for('admin.add_plan') }}" class="btn btn-primary">
+          {{ _('Create Your First Plan') }}
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+<!-- Add Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+{% endblock %}

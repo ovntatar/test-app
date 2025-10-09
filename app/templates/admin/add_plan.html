@@ -1,0 +1,132 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-12 col-lg-10">
+    <div class="card shadow-sm">
+      <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+          <h1 class="h4 mb-0">{{ _('Add New Plan') }}</h1>
+          <a href="{{ url_for('admin.plans') }}" class="btn btn-sm btn-outline-secondary">
+            {{ _('Back to Plans') }}
+          </a>
+        </div>
+
+        <form method="POST" novalidate>
+          {{ form.csrf_token }}
+          
+          <!-- Basic Information -->
+          <h5 class="mb-3">{{ _('Basic Information') }}</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              {{ form.name.label(class="form-label") }}
+              {{ form.name(class="form-control" + (" is-invalid" if form.name.errors else ""), placeholder="Free, Pro, Enterprise") }}
+              {% for error in form.name.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+            <div class="col-md-6">
+              {{ form.sort_order.label(class="form-label") }}
+              {{ form.sort_order(class="form-control" + (" is-invalid" if form.sort_order.errors else ""), placeholder="0") }}
+              {% for error in form.sort_order.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+              <small class="form-text text-muted">{{ _('Lower numbers appear first') }}</small>
+            </div>
+            <div class="col-12">
+              {{ form.description.label(class="form-label") }}
+              {{ form.description(class="form-control" + (" is-invalid" if form.description.errors else ""), rows=3, placeholder="Short description of the plan") }}
+              {% for error in form.description.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+            </div>
+          </div>
+
+          <!-- Features -->
+          <h5 class="mb-3">{{ _('Features') }}</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              {{ form.option1.label(class="form-label") }}
+              {{ form.option1(class="form-control", placeholder="e.g., 10 Projects") }}
+            </div>
+            <div class="col-md-6">
+              {{ form.option2.label(class="form-label") }}
+              {{ form.option2(class="form-control", placeholder="e.g., 5GB Storage") }}
+            </div>
+            <div class="col-md-6">
+              {{ form.option3.label(class="form-label") }}
+              {{ form.option3(class="form-control", placeholder="e.g., Email Support") }}
+            </div>
+            <div class="col-md-6">
+              {{ form.option4.label(class="form-label") }}
+              {{ form.option4(class="form-control", placeholder="e.g., API Access") }}
+            </div>
+            <div class="col-md-12">
+              {{ form.option5.label(class="form-label") }}
+              {{ form.option5(class="form-control", placeholder="e.g., Priority Support") }}
+            </div>
+          </div>
+
+          <!-- Pricing -->
+          <h5 class="mb-3">{{ _('Pricing') }}</h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-4">
+              {{ form.price.label(class="form-label") }}
+              {{ form.price(class="form-control" + (" is-invalid" if form.price.errors else ""), placeholder="0.00") }}
+              {% for error in form.price.errors %}
+                <div class="invalid-feedback">{{ error }}</div>
+              {% endfor %}
+              <small class="form-text text-muted">{{ _('Use 0 for free plans') }}</small>
+            </div>
+            <div class="col-md-4">
+              {{ form.currency.label(class="form-label") }}
+              {{ form.currency(class="form-select") }}
+            </div>
+            <div class="col-md-4">
+              {{ form.billing_period.label(class="form-label") }}
+              {{ form.billing_period(class="form-select") }}
+            </div>
+          </div>
+
+          <!-- Stripe Integration -->
+          <h5 class="mb-3">{{ _('Stripe Integration') }} <small class="text-muted">({{ _('Optional') }})</small></h5>
+          <div class="row g-3 mb-4">
+            <div class="col-md-6">
+              {{ form.stripe_price_id.label(class="form-label") }}
+              {{ form.stripe_price_id(class="form-control", placeholder="price_...") }}
+              <small class="form-text text-muted">{{ _('Stripe Price ID for subscriptions') }}</small>
+            </div>
+            <div class="col-md-6">
+              {{ form.stripe_product_id.label(class="form-label") }}
+              {{ form.stripe_product_id(class="form-control", placeholder="prod_...") }}
+              <small class="form-text text-muted">{{ _('Stripe Product ID') }}</small>
+            </div>
+          </div>
+
+          <!-- Settings -->
+          <h5 class="mb-3">{{ _('Settings') }}</h5>
+          <div class="mb-4">
+            <div class="form-check mb-2">
+              {{ form.is_active(class="form-check-input") }}
+              {{ form.is_active.label(class="form-check-label") }}
+              <small class="form-text text-muted d-block">{{ _('Only active plans are visible to users') }}</small>
+            </div>
+            <div class="form-check">
+              {{ form.is_featured(class="form-check-input") }}
+              {{ form.is_featured.label(class="form-check-label") }}
+              <small class="form-text text-muted d-block">{{ _('Featured plans are highlighted') }}</small>
+            </div>
+          </div>
+
+          <hr>
+
+          <div class="d-grid gap-2">
+            {{ form.submit(class="btn btn-primary btn-lg") }}
+            <a href="{{ url_for('admin.plans') }}" class="btn btn-outline-secondary">{{ _('Cancel') }}</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

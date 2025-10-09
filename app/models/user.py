@@ -16,6 +16,11 @@ class User(UserMixin, db.Model):
     
     # New field for enable/disable functionality
     is_active = db.Column(db.Boolean, default=True, nullable=False, index=True)
+    
+    # Plan relationship
+    plan_id = db.Column(db.Integer, db.ForeignKey('plan.id'), nullable=True)
+    plan = db.relationship('Plan', back_populates='users')
+    plan_subscribed_at = db.Column(db.DateTime, nullable=True)
 
     # Relationship: one-to-one billing profile
     billing = db.relationship("BillingProfile", uselist=False, back_populates="user", cascade="all, delete-orphan")
@@ -47,3 +52,13 @@ class User(UserMixin, db.Model):
     def is_anonymous(self):
         """Required by Flask-Login"""
         return False
+    
+    @property
+    def current_plan(self):
+        """Get current plan or return Free plan"""
+        return self.plan if self.plan else None
+    
+    @property
+    def plan_name(self):
+        """Get plan name or 'Free'"""
+        return self.plan.name if self.plan else 'Free'

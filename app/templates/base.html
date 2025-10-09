@@ -19,8 +19,16 @@
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.index') }}">{{ _('Home') }}</a></li>
             <li class="nav-item"><a class="nav-link" href="{{ url_for('main.about') }}">{{ _('About') }}</a></li>
             <li class="nav-item"><a class="nav-link" href="/api/v1/ping">API Ping</a></li>
-          {% if current_user.is_authenticated and current_user.role == 'admin' and has_endpoint('admin.index') %}
-            <li class="nav-item"><a class="nav-link" href="{{ url_for('admin.index') }}">Admin</a></li>
+          {% if current_user.is_authenticated and current_user.role == 'admin' %}
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown">
+                {{ _('Admin') }}
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="{{ url_for('admin.index') }}">{{ _('Users') }}</a></li>
+                <li><a class="dropdown-item" href="{{ url_for('admin.plans') }}">{{ _('Plans') }}</a></li>
+              </ul>
+            </li>
           {% endif %}
           </ul>
           <ul class="navbar-nav">
