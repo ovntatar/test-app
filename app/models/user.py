@@ -14,7 +14,7 @@ class User(UserMixin, db.Model):
     created_at = db.Column(db.DateTime, default=datetime.utcnow, nullable=False)
     confirmed_at = db.Column(db.DateTime, nullable=True)
     
-    # New field for enable/disable functionality
+    # Enable/disable functionality
     is_active = db.Column(db.Boolean, default=True, nullable=False, index=True)
     
     # Plan relationship
@@ -22,8 +22,9 @@ class User(UserMixin, db.Model):
     plan = db.relationship('Plan', back_populates='users')
     plan_subscribed_at = db.Column(db.DateTime, nullable=True)
 
-    # Relationship: one-to-one billing profile
+    # Relationships
     billing = db.relationship("BillingProfile", uselist=False, back_populates="user", cascade="all, delete-orphan")
+    api_keys = db.relationship("APIKey", back_populates="user", cascade="all, delete-orphan", lazy='dynamic')
 
     def set_password(self, password: str):
         self.password_hash = generate_password_hash(password)
@@ -38,7 +39,6 @@ class User(UserMixin, db.Model):
     def confirm(self):
         self.confirmed_at = datetime.utcnow()
     
-    # Override Flask-Login's is_active property
     def get_id(self):
         """Required by Flask-Login"""
         return str(self.id)
@@ -62,3 +62,8 @@ class User(UserMixin, db.Model):
     def plan_name(self):
         """Get plan name or 'Free'"""
         return self.plan.name if self.plan else 'Free'
+    
+    @property
+    def active_api_keys_count(self):
+        """Count of active API keys"""
+        return self.api_keys.filter_by(is_active=True).count()

@@ -7,6 +7,104 @@ from . import bp
 from flask_babel import _
 from datetime import datetime
 
+# Add these imports at the top
+from ...models import APIKey
+
+# Add these routes to account blueprint
+
+@bp.route('/api-keys')
+@login_required
+def api_keys():
+    """View and manage API keys"""
+    keys = current_user.api_keys.order_by(APIKey.created_at.desc()).all()
+    return render_template('account/api_keys.html', keys=keys)
+
+@bp.route('/api-keys/create', methods=['POST'])
+@login_required
+def create_api_key():
+    """Create a new API key"""
+    name = request.form.get('name', '').strip()
+    
+    # Check plan limits (optional)
+    # Free plan: 1 key, Pro: 5 keys, Enterprise: unlimited
+    max_keys = {
+        'Free': 1,
+        'Pro': 5,
+        'Enterprise': 999
+    }
+    
+    current_count = current_user.active_api_keys_count
+    plan_limit = max_keys.get(current_user.plan_name, 1)
+    
+    if current_count >= plan_limit:
+        flash(_('You have reached the maximum number of API keys for your plan. Upgrade to create more.'), 'warning')
+        return redirect(url_for('account.api_keys'))
+    
+    # Generate new key
+    raw_key = APIKey.generate_key()
+    
+    # Create API key record
+    api_key = APIKey(
+        user_id=current_user.id,
+        key_hash=APIKey.hash_key(raw_key),
+        key_prefix=raw_key[:12],  # Store first 12 chars for display
+        name=name if name else f"API Key {current_count + 1}"
+    )
+    
+    db.session.add(api_key)
+    db.session.commit()
+    
+    # Show the key once (it will be hashed and cannot be retrieved again)
+    flash(_('API key created successfully. Copy it now - you won\'t see it again!'), 'success')
+    return render_template('account/api_key_created.html', api_key=raw_key, key_name=api_key.name)
+
+@bp.route('/api-keys/<int:key_id>/delete', methods=['POST'])
+@login_required
+def delete_api_key(key_id):
+    """Delete an API key"""
+    api_key = APIKey.query.filter_by(id=key_id, user_id=current_user.id).first_or_404()
+    
+    key_name = api_key.name
+    db.session.delete(api_key)
+    db.session.commit()
+    
+    flash(_('API key "%(name)s" deleted successfully', name=key_name), 'success')
+    return redirect(url_for('account.api_keys'))
+
+@bp.route('/api-keys/<int:key_id>/toggle', methods=['POST'])
+@login_required
+def toggle_api_key(key_id):
+    """Enable/disable an API key"""
+    api_key = APIKey.query.filter_by(id=key_id, user_id=current_user.id).first_or_404()
+    
+    api_key.is_active = not api_key.is_active
+    db.session.commit()
+    
+    status = _('enabled') if api_key.is_active else _('disabled')
+    flash(_('API key "%(name)s" has been %(status)s', name=api_key.name, status=status), 'success')
+    return redirect(url_for('account.api_keys'))
+
+@bp.route('/api-keys/<int:key_id>/regenerate', methods=['POST'])
+@login_required
+def regenerate_api_key(key_id):
+    """Regenerate an API key"""
+    api_key = APIKey.query.filter_by(id=key_id, user_id=current_user.id).first_or_404()
+    
+    # Generate new key
+    raw_key = APIKey.generate_key()
+    
+    # Update existing record
+    api_key.key_hash = APIKey.hash_key(raw_key)
+    api_key.key_prefix = raw_key[:12]
+    api_key.created_at = datetime.utcnow()
+    api_key.last_used_at = None
+    
+    db.session.commit()
+    
+    flash(_('API key regenerated successfully. Copy it now - you won\'t see it again!'), 'success')
+    return render_template('account/api_key_created.html', api_key=raw_key, key_name=api_key.name)
+
+
 @bp.route('/language', methods=['GET', 'POST'])
 @login_required
 def change_language():
