@@ -3,7 +3,7 @@ from .context_helpers import register_context_processors
 from flask import Flask
 from flask import render_template, redirect, url_for, flash, request, current_app
 from .config import DevelopmentConfig, ProductionConfig, TestingConfig
-from .extensions import db, migrate, login_mgr
+from .extensions import db, migrate, login_mgr, mail
 from .models import User
 from flask_babel import Babel
 
@@ -61,6 +61,7 @@ def create_app(config_class=None):
     db.init_app(app)
     migrate.init_app(app, db)
     login_mgr.init_app(app)
+    mail.init_app(app)  # Initialize Flask-Mail
 
     # User loader for Flask-Login
     @login_mgr.user_loader
@@ -80,7 +81,7 @@ def create_app(config_class=None):
     from .blueprints.account import bp as account_bp
     app.register_blueprint(account_bp, url_prefix="/account")
 
-    # Admin blueprint - NEW
+    # Admin blueprint
     from .blueprints.admin import bp as admin_bp
     app.register_blueprint(admin_bp, url_prefix="/admin")
 

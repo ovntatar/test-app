@@ -3,10 +3,12 @@ from flask_login import login_user, logout_user, login_required, current_user
 from ...extensions import db
 from ...models import User
 from ...utils.security import generate_token, verify_token
+from ...utils.email import send_confirmation_email, send_password_reset_email, send_welcome_email
 from .forms import RegisterForm, LoginForm, ForgotForm, ResetForm
 from . import bp
 
 def _dev_show_link(link: str):
+    """Show link in development mode"""
     if current_app.debug or current_app.config.get("ENV") == "development":
         print("DEV LINK:", link)
         return link
@@ -29,9 +31,17 @@ def register():
 
         token = generate_token({"uid": user.id, "purpose": "confirm"})
         link = url_for(".confirm_email", token=token, _external=True)
+        
+        # Send email in production, show link in development
+        send_confirmation_email(user, token, link)
         dev_link = _dev_show_link(link)
-        flash("Account created. Please confirm your email via the link.", "success")
-        return render_template("auth/confirm_sent.html", confirm_link=dev_link)
+        
+        if current_app.config.get('MAIL_SUPPRESS_SEND', True):
+            flash("Account created. Please confirm your email via the link.", "success")
+            return render_template("auth/confirm_sent.html", confirm_link=dev_link)
+        else:
+            flash("Account created. We've sent a confirmation email to your address.", "success")
+            return redirect(url_for(".login"))
     return render_template("auth/register.html", form=form)
 
 @bp.route("/confirm/<token>")
@@ -47,6 +57,10 @@ def confirm_email(token):
     if not user.is_confirmed:
         user.confirm()
         db.session.commit()
+        
+        # Send welcome email
+        send_welcome_email(user)
+    
     flash("Email confirmed. You can sign in now.", "success")
     return redirect(url_for(".login"))
 
@@ -83,9 +97,17 @@ def resend_confirmation():
     if user and not user.is_confirmed:
         token = generate_token({"uid": user.id, "purpose": "confirm"})
         link = url_for(".confirm_email", token=token, _external=True)
+        
+        # Send email
+        send_confirmation_email(user, token, link)
         dev_link = _dev_show_link(link)
-        flash("Confirmation link generated.", "info")
-        return render_template("auth/confirm_sent.html", confirm_link=dev_link)
+        
+        if current_app.config.get('MAIL_SUPPRESS_SEND', True):
+            flash("Confirmation link generated.", "info")
+            return render_template("auth/confirm_sent.html", confirm_link=dev_link)
+        else:
+            flash("Confirmation email sent. Please check your inbox.", "info")
+            return redirect(url_for(".login"))
     flash("If the account exists and is unconfirmed, a link was generated.", "info")
     return redirect(url_for(".login"))
 
@@ -100,9 +122,17 @@ def forgot():
         if user:
             token = generate_token({"uid": user.id, "purpose": "reset"})
             link = url_for(".reset_with_token", token=token, _external=True)
+            
+            # Send email
+            send_password_reset_email(user, token, link)
             dev_link = _dev_show_link(link)
-            return render_template("auth/confirm_sent.html", confirm_link=dev_link, reset=True)
-        flash("If an account exists, a reset link has been generated.", "info")
+            
+            if current_app.config.get('MAIL_SUPPRESS_SEND', True):
+                return render_template("auth/confirm_sent.html", confirm_link=dev_link, reset=True)
+            else:
+                flash("Password reset email sent. Please check your inbox.", "info")
+                return redirect(url_for(".login"))
+        flash("If an account exists, a reset link has been sent.", "info")
         return redirect(url_for(".login"))
     return render_template("auth/forgot.html", form=form)
 
