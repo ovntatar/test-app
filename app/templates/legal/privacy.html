@@ -1,0 +1,152 @@
+<!-- app/templates/legal/privacy.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .legal-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .legal-content h1 {
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+    }
+    
+    .legal-content h2 {
+        color: var(--secondary-color);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .legal-content p, .legal-content li {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+</style>
+
+<div class="legal-content">
+    <h1>Privacy Policy</h1>
+    <p class="lead">Your privacy is important to us</p>
+    
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+            <h2>1. Introduction</h2>
+            <p>
+                This Privacy Policy explains how YourApp GmbH ("we", "us", or "our") collects, uses, and protects your 
+                personal information when you use our services.
+            </p>
+            
+            <h2>2. Information We Collect</h2>
+            <h3 class="h5">2.1 Information You Provide</h3>
+            <ul>
+                <li><strong>Account Information:</strong> Email address, name, password</li>
+                <li><strong>Billing Information:</strong> Payment details, billing address, tax ID</li>
+                <li><strong>Profile Information:</strong> Company details, preferences, language settings</li>
+                <li><strong>Communications:</strong> Support requests, feedback, inquiries</li>
+            </ul>
+            
+            <h3 class="h5">2.2 Automatically Collected Information</h3>
+            <ul>
+                <li><strong>Usage Data:</strong> Features used, actions taken, time spent</li>
+                <li><strong>Device Information:</strong> IP address, browser type, operating system</li>
+                <li><strong>Cookies:</strong> Session data, preferences, analytics</li>
+            </ul>
+            
+            <h2>3. How We Use Your Information</h2>
+            <p>We use your information to:</p>
+            <ul>
+                <li>Provide and improve our services</li>
+                <li>Process payments and manage subscriptions</li>
+                <li>Send service updates and notifications</li>
+                <li>Provide customer support</li>
+                <li>Analyze usage patterns and improve user experience</li>
+                <li>Comply with legal obligations</li>
+                <li>Prevent fraud and ensure security</li>
+            </ul>
+            
+            <h2>4. Data Sharing and Disclosure</h2>
+            <p>We may share your information with:</p>
+            <ul>
+                <li><strong>Service Providers:</strong> Payment processors, hosting providers, analytics services</li>
+                <li><strong>Legal Requirements:</strong> When required by law or to protect our rights</li>
+                <li><strong>Business Transfers:</strong> In case of merger, acquisition, or sale of assets</li>
+            </ul>
+            <p>We do not sell your personal information to third parties.</p>
+            
+            <h2>5. Data Security</h2>
+            <p>
+                We implement industry-standard security measures to protect your data:
+            </p>
+            <ul>
+                <li>256-bit SSL encryption for data in transit</li>
+                <li>Encrypted data storage</li>
+                <li>Regular security audits</li>
+                <li>Access controls and authentication</li>
+                <li>SOC 2 Type II compliance</li>
+            </ul>
+            
+            <h2>6. Data Retention</h2>
+            <p>
+                We retain your personal information for as long as your account is active or as needed to provide services. 
+                After account deletion, we retain certain information for legal and compliance purposes for up to 7 years.
+            </p>
+            
+            <h2>7. Your Rights (GDPR)</h2>
+            <p>Under the GDPR, you have the right to:</p>
+            <ul>
+                <li><strong>Access:</strong> Request a copy of your personal data</li>
+                <li><strong>Correction:</strong> Request correction of inaccurate data</li>
+                <li><strong>Deletion:</strong> Request deletion of your data</li>
+                <li><strong>Portability:</strong> Request transfer of your data</li>
+                <li><strong>Objection:</strong> Object to processing of your data</li>
+                <li><strong>Restriction:</strong> Request restriction of processing</li>
+                <li><strong>Withdraw Consent:</strong> Withdraw consent at any time</li>
+            </ul>
+            <p>To exercise these rights, contact us at privacy@yourapp.com</p>
+            
+            <h2>8. Cookies and Tracking</h2>
+            <p>We use cookies for:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Required for basic functionality</li>
+                <li><strong>Analytics Cookies:</strong> Help us understand usage patterns</li>
+                <li><strong>Preference Cookies:</strong> Remember your settings</li>
+            </ul>
+            <p>You can control cookies through your browser settings.</p>
+            
+            <h2>9. International Data Transfers</h2>
+            <p>
+                Your data may be processed in countries outside the EU. We ensure adequate protection through:
+            </p>
+            <ul>
+                <li>Standard Contractual Clauses</li>
+                <li>Privacy Shield certification (where applicable)</li>
+                <li>Other approved transfer mechanisms</li>
+            </ul>
+            
+            <h2>10. Children's Privacy</h2>
+            <p>
+                Our services are not intended for children under 16. We do not knowingly collect information from children.
+            </p>
+            
+            <h2>11. Changes to This Policy</h2>
+            <p>
+                We may update this Privacy Policy. We will notify you of significant changes via email or through the platform.
+            </p>
+            
+            <h2>12. Contact Us</h2>
+            <p>
+                For privacy-related questions or concerns:<br>
+                <strong>Email:</strong> privacy@yourapp.com<br>
+                <strong>Address:</strong> YourApp GmbH, Musterstraße 123, 90443 Nürnberg, Germany<br>
+                <strong>Data Protection Officer:</strong> dpo@yourapp.com
+            </p>
+        </div>
+    </div>
+    
+    <div class="text-center mb-5">
+        <p class="text-muted">Last updated: January 2025</p>
+    </div>
+</div>
+
+{% endblock %}

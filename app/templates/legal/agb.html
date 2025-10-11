@@ -1,0 +1,124 @@
+<!-- app/templates/legal/agb.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .legal-content {
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .legal-content h1 {
+        color: var(--primary-color);
+        margin-bottom: 2rem;
+    }
+    
+    .legal-content h2 {
+        color: var(--secondary-color);
+        margin-top: 2rem;
+        margin-bottom: 1rem;
+    }
+    
+    .legal-content p, .legal-content li {
+        margin-bottom: 1rem;
+        line-height: 1.8;
+    }
+</style>
+
+<div class="legal-content">
+    <h1>Allgemeine Geschäftsbedingungen (AGB)</h1>
+    <p class="lead">General Terms and Conditions</p>
+    
+    <div class="card border-0 shadow-sm mb-4">
+        <div class="card-body p-4">
+            <h2>§ 1 Geltungsbereich</h2>
+            <p>
+                Diese Allgemeinen Geschäftsbedingungen (im Folgenden "AGB") gelten für alle Verträge über die Nutzung 
+                der Software-as-a-Service Plattform "YourApp" zwischen YourApp GmbH (im Folgenden "Anbieter") und dem 
+                Kunden (im Folgenden "Nutzer").
+            </p>
+            
+            <h2>§ 2 Vertragsgegenstand</h2>
+            <p>
+                Der Anbieter stellt dem Nutzer eine cloudbasierte Software zur Verfügung, die über das Internet 
+                zugänglich ist. Der konkrete Funktionsumfang ergibt sich aus der jeweils gewählten Leistungsstufe 
+                (Free, Pro, Enterprise).
+            </p>
+            
+            <h2>§ 3 Vertragsschluss</h2>
+            <p>
+                Der Vertrag kommt durch die Registrierung des Nutzers auf der Plattform zustande. Mit der Registrierung 
+                erklärt der Nutzer sein Einverständnis mit diesen AGB.
+            </p>
+            
+            <h2>§ 4 Leistungsumfang</h2>
+            <ul>
+                <li>Bereitstellung der Software über das Internet</li>
+                <li>Datenspeicherung auf sicheren Servern</li>
+                <li>Regelmäßige Datensicherung</li>
+                <li>Technischer Support gemäß gewähltem Plan</li>
+                <li>Software-Updates und Wartung</li>
+            </ul>
+            
+            <h2>§ 5 Verfügbarkeit</h2>
+            <p>
+                Der Anbieter strebt eine Verfügbarkeit der Plattform von 99,9% im Jahresmittel an. Ausgenommen sind 
+                Wartungsarbeiten, die nach Möglichkeit außerhalb der Geschäftszeiten durchgeführt werden.
+            </p>
+            
+            <h2>§ 6 Pflichten des Nutzers</h2>
+            <ul>
+                <li>Wahrheitsgemäße Angaben bei der Registrierung</li>
+                <li>Geheimhaltung der Zugangsdaten</li>
+                <li>Keine missbräuchliche Nutzung der Plattform</li>
+                <li>Einhaltung geltender Gesetze</li>
+                <li>Regelmäßige Aktualisierung der Kontaktdaten</li>
+            </ul>
+            
+            <h2>§ 7 Vergütung und Zahlungsbedingungen</h2>
+            <p>
+                Die Vergütung richtet sich nach dem gewählten Preisplan. Zahlungen erfolgen monatlich oder jährlich im Voraus. 
+                Bei Zahlungsverzug kann der Anbieter den Zugang sperren.
+            </p>
+            
+            <h2>§ 8 Vertragslaufzeit und Kündigung</h2>
+            <p>
+                Der Vertrag wird auf unbestimmte Zeit geschlossen. Beide Parteien können mit einer Frist von 30 Tagen zum 
+                Monatsende kündigen. Das Recht zur außerordentlichen Kündigung bleibt unberührt.
+            </p>
+            
+            <h2>§ 9 Datenschutz</h2>
+            <p>
+                Der Anbieter verpflichtet sich, alle datenschutzrechtlichen Bestimmungen einzuhalten. Details regelt die 
+                separate Datenschutzerklärung.
+            </p>
+            
+            <h2>§ 10 Haftung</h2>
+            <p>
+                Der Anbieter haftet für Vorsatz und grobe Fahrlässigkeit. Bei leichter Fahrlässigkeit haftet der Anbieter nur 
+                bei Verletzung wesentlicher Vertragspflichten. Die Haftung ist in diesem Fall auf den vorhersehbaren, 
+                vertragstypischen Schaden begrenzt.
+            </p>
+            
+            <h2>§ 11 Änderungen der AGB</h2>
+            <p>
+                Der Anbieter behält sich vor, diese AGB zu ändern. Änderungen werden dem Nutzer mindestens 4 Wochen vor 
+                Inkrafttreten per E-Mail mitgeteilt. Widerspricht der Nutzer nicht innerhalb von 4 Wochen, gelten die 
+                Änderungen als akzeptiert.
+            </p>
+            
+            <h2>§ 12 Schlussbestimmungen</h2>
+            <p>
+                Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist Nürnberg. Sollten einzelne Bestimmungen 
+                unwirksam sein, bleibt die Wirksamkeit der übrigen Bestimmungen unberührt.
+            </p>
+        </div>
+    </div>
+    
+    <div class="text-center mb-5">
+        <p class="text-muted">Stand: Januar 2025</p>
+    </div>
+</div>
+
+{% endblock %}
+

@@ -1,0 +1,227 @@
+<!-- app/templates/company.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .company-hero {
+        background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+        color: white;
+        padding: 80px 0;
+        margin: -2rem -15px 3rem;
+        border-radius: 20px;
+    }
+    
+    .value-card {
+        padding: 2rem;
+        border-radius: 15px;
+        background: white;
+        border: 2px solid #e0e0e0;
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .value-card:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-5px);
+    }
+    
+    .team-member {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .team-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3rem;
+        color: white;
+        margin: 0 auto 1rem;
+    }
+</style>
+
+<!-- Hero -->
+<section class="company-hero">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-4">About YourApp</h1>
+        <p class="lead mb-4">
+            We're on a mission to help businesses succeed through innovative technology solutions
+        </p>
+    </div>
+</section>
+
+<!-- Our Story -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 mx-auto">
+                <h2 class="display-5 fw-bold mb-4">Our Story</h2>
+                <p class="lead">
+                    Founded in 2020, YourApp started with a simple idea: business software should be 
+                    powerful yet easy to use. We saw too many companies struggling with complex, 
+                    outdated systems that held them back instead of helping them grow.
+                </p>
+                <p class="lead">
+                    Today, we serve over 50,000 businesses worldwide, from startups to enterprises. 
+                    Our team of 200+ professionals is dedicated to building the best business 
+                    management platform on the market.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Values -->
+<section class="py-5 bg-light" style="margin: 0 -15px; border-radius: 20px;">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Our Values</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-heart-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Customer First</h4>
+                    <p class="text-muted text-center">
+                        Every decision we make starts with how it benefits our customers
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-lightbulb-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Innovation</h4>
+                    <p class="text-muted text-center">
+                        We constantly push boundaries to deliver cutting-edge solutions
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-shield-check" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Trust</h4>
+                    <p class="text-muted text-center">
+                        We earn trust through transparency and reliability
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="text-center mb-3">
+                        <i class="bi bi-people-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                    </div>
+                    <h4 class="text-center mb-3">Teamwork</h4>
+                    <p class="text-muted text-center">
+                        Together we achieve more than we ever could alone
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Team -->
+<section class="py-5 mt-5">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Leadership Team</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">JD</div>
+                    <h4>Jane Doe</h4>
+                    <p class="text-muted">CEO & Co-Founder</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">JS</div>
+                    <h4>John Smith</h4>
+                    <p class="text-muted">CTO & Co-Founder</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">SK</div>
+                    <h4>Sarah Kim</h4>
+                    <p class="text-muted">VP of Product</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">MP</div>
+                    <h4>Michael Park</h4>
+                    <p class="text-muted">VP of Engineering</p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 40px; height: 40px;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="py-5 bg-dark text-white" style="margin: 0 -15px; border-radius: 20px;">
+    <div class="container">
+        <div class="row text-center">
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+                <h2 class="display-4 fw-bold" style="color: var(--accent-color);">200+</h2>
+                <p class="lead">Team Members</p>
+            </div>
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+                <h2 class="display-4 fw-bold" style="color: var(--accent-color);">50K+</h2>
+                <p class="lead">Customers</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <h2 class="display-4 fw-bold" style="color: var(--accent-color);">150+</h2>
+                <p class="lead">Countries</p>
+            </div>
+            <div class="col-md-3 col-6">
+                <h2 class="display-4 fw-bold" style="color: var(--accent-color);">99.9%</h2>
+                <p class="lead">Uptime</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Join Us -->
+<section class="py-5 mt-5">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">Join Our Team</h2>
+        <p class="lead mb-4">We're always looking for talented people to join our mission</p>
+        <a href="{{ url_for('main.careers') }}" class="btn btn-action btn-lg">View Open Positions</a>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .careers-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 80px 0;
+        margin: -2rem -15px 3rem;
+        border-radius: 20px;
+    }
+    
+    .job-card {
+        padding: 2rem;
+        border-radius: 15px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .job-card:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 5px 20px rgba(0, 102, 204, 0.15);
+        transform: translateY(-3px);
+    }
+    
+    .benefit-card {
+        padding: 2rem;
+        text-align: center;
+        border-radius: 15px;
+        background: white;
+        height: 100%;
+    }
+    
+    .benefit-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        margin: 0 auto 1rem;
+    }
+</style>
+
+<!-- Hero -->
+<section class="careers-hero">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-4">Join Our Team</h1>
+        <p class="lead mb-4">
+            Help us build the future of business management software
+        </p>
+        <a href="#positions" class="btn btn-light btn-lg">View Open Positions</a>
+    </div>
+</section>
+
+<!-- Why Join Us -->
+<section class="mb-5">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Why Work With Us?</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-cash-stack"></i>
+                    </div>
+                    <h4 class="mb-3">Competitive Salary</h4>
+                    <p class="text-muted">
+                        Industry-leading compensation packages with equity options
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-hospital"></i>
+                    </div>
+                    <h4 class="mb-3">Health & Wellness</h4>
+                    <p class="text-muted">
+                        Comprehensive health, dental, and vision insurance
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-house-heart"></i>
+                    </div>
+                    <h4 class="mb-3">Remote Friendly</h4>
+                    <p class="text-muted">
+                        Work from anywhere with flexible schedule options
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-book"></i>
+                    </div>
+                    <h4 class="mb-3">Learning Budget</h4>
+                    <p class="text-muted">
+                        Annual budget for courses, conferences, and books
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-calendar-heart"></i>
+                    </div>
+                    <h4 class="mb-3">Paid Time Off</h4>
+                    <p class="text-muted">
+                        Generous PTO policy plus company holidays
+                    </p>
+                </div>
+            </div>
+            <div class="col-md-6 col-lg-4">
+                <div class="benefit-card">
+                    <div class="benefit-icon">
+                        <i class="bi bi-people"></i>
+                    </div>
+                    <h4 class="mb-3">Great Culture</h4>
+                    <p class="text-muted">
+                        Collaborative environment with amazing people
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Open Positions -->
+<section class="py-5 bg-light" style="margin: 0 -15px; border-radius: 20px;" id="positions">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Open Positions</h2>
+        
+        <!-- Engineering -->
+        <h3 class="h4 mb-4">Engineering</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-2">Senior Full Stack Engineer</h4>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt me-2"></i>Remote / San Francisco
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-briefcase me-2"></i>Full-time
+                            </div>
+                        </div>
+                        <span class="badge bg-success">New</span>
+                    </div>
+                    <p class="text-muted mb-3">
+                        Build scalable web applications using Python, React, and modern cloud technologies.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark">Python</span>
+                        <span class="badge bg-light text-dark">React</span>
+                        <span class="badge bg-light text-dark">PostgreSQL</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-2">DevOps Engineer</h4>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt me-2"></i>Remote / New York
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-briefcase me-2"></i>Full-time
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-3">
+                        Manage infrastructure, CI/CD pipelines, and ensure 99.9% uptime for our platform.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark">AWS</span>
+                        <span class="badge bg-light text-dark">Docker</span>
+                        <span class="badge bg-light text-dark">Kubernetes</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Product & Design -->
+        <h3 class="h4 mb-4">Product & Design</h3>
+        <div class="row g-4 mb-5">
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-2">Product Manager</h4>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt me-2"></i>Remote / London
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-briefcase me-2"></i>Full-time
+                            </div>
+                        </div>
+                        <span class="badge bg-success">New</span>
+                    </div>
+                    <p class="text-muted mb-3">
+                        Define product strategy, roadmap, and work closely with engineering and design teams.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark">Product Strategy</span>
+                        <span class="badge bg-light text-dark">Agile</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-2">UI/UX Designer</h4>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt me-2"></i>Remote / Berlin
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-briefcase me-2"></i>Full-time
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-3">
+                        Design beautiful and intuitive user experiences for our platform.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark">Figma</span>
+                        <span class="badge bg-light text-dark">User Research</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Sales & Marketing -->
+        <h3 class="h4 mb-4">Sales & Marketing</h3>
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-2">Account Executive</h4>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt me-2"></i>Remote / Chicago
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-briefcase me-2"></i>Full-time
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-muted mb-3">
+                        Drive sales, build relationships, and help businesses succeed with our platform.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark">B2B Sales</span>
+                        <span class="badge bg-light text-dark">SaaS</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="job-card">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <div>
+                            <h4 class="mb-2">Content Marketing Manager</h4>
+                            <div class="text-muted">
+                                <i class="bi bi-geo-alt me-2"></i>Remote
+                                <span class="mx-2">•</span>
+                                <i class="bi bi-briefcase me-2"></i>Full-time
+                            </div>
+                        </div>
+                        <span class="badge bg-success">New</span>
+                    </div>
+                    <p class="text-muted mb-3">
+                        Create compelling content that drives engagement and growth.
+                    </p>
+                    <div class="d-flex gap-2 flex-wrap">
+                        <span class="badge bg-light text-dark">Content Strategy</span>
+                        <span class="badge bg-light text-dark">SEO</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 mt-5">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">Don't See Your Role?</h2>
+        <p class="lead mb-4">We're always looking for talented people. Send us your resume!</p>
+        <a href="{{ url_for('main.contact') }}" class="btn btn-action btn-lg">Get In Touch</a>
+    </div>
+</section>
+
+{% endblock %}

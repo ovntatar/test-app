@@ -1,0 +1,390 @@
+<!-- app/templates/blog.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .blog-hero {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        color: white;
+        padding: 80px 0;
+        margin: -2rem -15px 3rem;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .blog-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.3;
+    }
+    
+    .blog-hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .featured-post {
+        border-radius: 20px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+        transition: all 0.3s ease;
+        background: white;
+    }
+    
+    .featured-post:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+    }
+    
+    .featured-image {
+        height: 400px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 5rem;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .featured-image::after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: linear-gradient(to bottom, transparent, rgba(0,0,0,0.3));
+    }
+    
+    .blog-card {
+        border-radius: 15px;
+        overflow: hidden;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+        height: 100%;
+        background: white;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .blog-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
+        border-color: var(--primary-color);
+    }
+    
+    .blog-image {
+        height: 220px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-size: 3.5rem;
+        position: relative;
+    }
+    
+    .category-badge {
+        padding: 0.4rem 1rem;
+        border-radius: 50px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+    }
+    
+    .author-avatar {
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 600;
+        color: white;
+    }
+    
+    .read-time {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #6c757d;
+        font-size: 0.9rem;
+    }
+</style>
+
+<!-- Hero -->
+<section class="blog-hero">
+    <div class="container blog-hero-content">
+        <div class="text-center">
+            <h1 class="display-3 fw-bold mb-3">Our Blog</h1>
+            <p class="lead mb-4">Insights, updates, and stories from the YourApp team</p>
+            <div class="d-flex gap-3 justify-content-center flex-wrap">
+                <span class="badge bg-white text-dark px-3 py-2">All Posts</span>
+                <span class="badge bg-light bg-opacity-25 text-white px-3 py-2">Product Updates</span>
+                <span class="badge bg-light bg-opacity-25 text-white px-3 py-2">Tutorials</span>
+                <span class="badge bg-light bg-opacity-25 text-white px-3 py-2">Company News</span>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Featured Post -->
+<section class="mb-5">
+    <div class="container">
+        <div class="featured-post">
+            <div class="row g-0">
+                <div class="col-lg-6">
+                    <div class="featured-image">
+                        <i class="bi bi-rocket-takeoff"></i>
+                    </div>
+                </div>
+                <div class="col-lg-6 d-flex align-items-center">
+                    <div class="p-5">
+                        <span class="category-badge bg-primary text-white mb-3 d-inline-block">Featured</span>
+                        <h2 class="display-6 fw-bold mb-3">
+                            The Future of Business Management: AI-Powered Insights
+                        </h2>
+                        <p class="text-muted mb-4 lead">
+                            Discover how artificial intelligence is revolutionizing the way businesses operate. 
+                            Learn about our new AI-powered analytics features that help you make smarter decisions faster.
+                        </p>
+                        <div class="d-flex align-items-center justify-content-between mb-4">
+                            <div class="d-flex align-items-center gap-3">
+                                <div class="author-avatar">JD</div>
+                                <div>
+                                    <div class="fw-bold">Jane Doe</div>
+                                    <small class="text-muted">CEO & Co-Founder</small>
+                                </div>
+                            </div>
+                            <div class="text-muted">
+                                <div class="read-time">
+                                    <i class="bi bi-clock"></i>
+                                    <span>8 min read</span>
+                                </div>
+                                <small>January 15, 2025</small>
+                            </div>
+                        </div>
+                        <a href="#" class="btn btn-action btn-lg">
+                            Read Full Article <i class="bi bi-arrow-right ms-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Recent Posts -->
+<section class="mb-5">
+    <div class="container">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="h3 mb-0">Latest Articles</h2>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-outline-primary active">All</button>
+                <button type="button" class="btn btn-outline-primary">Product</button>
+                <button type="button" class="btn btn-outline-primary">Tutorials</button>
+                <button type="button" class="btn btn-outline-primary">Company</button>
+            </div>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-card">
+                    <div class="blog-image">
+                        <i class="bi bi-graph-up-arrow"></i>
+                    </div>
+                    <div class="card-body p-4 flex-grow-1 d-flex flex-column">
+                        <span class="category-badge bg-success text-white mb-3">Product Updates</span>
+                        <h3 class="h5 mb-3">New Features Released in Q1 2025</h3>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Check out our latest feature releases including advanced analytics, 
+                            AI-powered recommendations, and enhanced API capabilities...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">SK</div>
+                                <small class="text-muted">Sarah Kim</small>
+                            </div>
+                            <small class="text-muted">Jan 10, 2025</small>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary mt-3 w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #fa709a, #fee140);">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <div class="card-body p-4 flex-grow-1 d-flex flex-column">
+                        <span class="category-badge bg-danger text-white mb-3">Security</span>
+                        <h3 class="h5 mb-3">Best Practices for API Security in 2025</h3>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Learn how to secure your API integrations with these essential tips. 
+                            From authentication to rate limiting, we cover everything...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">MP</div>
+                                <small class="text-muted">Michael Park</small>
+                            </div>
+                            <small class="text-muted">Jan 5, 2025</small>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary mt-3 w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #667eea, #764ba2);">
+                        <i class="bi bi-code-slash"></i>
+                    </div>
+                    <div class="card-body p-4 flex-grow-1 d-flex flex-column">
+                        <span class="category-badge bg-info text-white mb-3">Tutorial</span>
+                        <h3 class="h5 mb-3">Building Your First Integration with YourApp API</h3>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            A step-by-step guide to integrating with our platform. 
+                            Perfect for developers getting started with our API...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">JS</div>
+                                <small class="text-muted">John Smith</small>
+                            </div>
+                            <small class="text-muted">Dec 28, 2024</small>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary mt-3 w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #f093fb, #f5576c);">
+                        <i class="bi bi-lightbulb"></i>
+                    </div>
+                    <div class="card-body p-4 flex-grow-1 d-flex flex-column">
+                        <span class="category-badge bg-warning text-dark mb-3">Business</span>
+                        <h3 class="h5 mb-3">10 Productivity Tips for Remote Teams</h3>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Working remotely? Discover proven strategies to keep your team 
+                            productive, engaged, and connected...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">JD</div>
+                                <small class="text-muted">Jane Doe</small>
+                            </div>
+                            <small class="text-muted">Dec 20, 2024</small>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary mt-3 w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #11998e, #38ef7d);">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <div class="card-body p-4 flex-grow-1 d-flex flex-column">
+                        <span class="category-badge bg-secondary text-white mb-3">Company</span>
+                        <h3 class="h5 mb-3">Behind the Scenes: Our Engineering Culture</h3>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            Get to know the brilliant minds behind our platform and learn about 
+                            our unique approach to building software...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">MP</div>
+                                <small class="text-muted">Michael Park</small>
+                            </div>
+                            <small class="text-muted">Dec 15, 2024</small>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary mt-3 w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="blog-card">
+                    <div class="blog-image" style="background: linear-gradient(135deg, #4facfe, #00f2fe);">
+                        <i class="bi bi-trophy"></i>
+                    </div>
+                    <div class="card-body p-4 flex-grow-1 d-flex flex-column">
+                        <span class="category-badge bg-success text-white mb-3">Case Study</span>
+                        <h3 class="h5 mb-3">How TechCorp Scaled to 10,000 Users</h3>
+                        <p class="text-muted mb-4 flex-grow-1">
+                            A customer success story showcasing real results. Learn how TechCorp 
+                            increased efficiency by 300% using our platform...
+                        </p>
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex align-items-center gap-2">
+                                <div class="author-avatar" style="width: 32px; height: 32px; font-size: 0.8rem;">SK</div>
+                                <small class="text-muted">Sarah Kim</small>
+                            </div>
+                            <small class="text-muted">Dec 10, 2024</small>
+                        </div>
+                        <a href="#" class="btn btn-outline-primary mt-3 w-100">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Pagination -->
+        <nav class="mt-5">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                    <a class="page-link" href="#"><i class="bi bi-chevron-left"></i> Previous</a>
+                </li>
+                <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item"><a class="page-link" href="#">4</a></li>
+                <li class="page-item">
+                    <a class="page-link" href="#">Next <i class="bi bi-chevron-right"></i></a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+
+<!-- Newsletter CTA -->
+<section class="py-5">
+    <div class="container">
+        <div class="card border-0 shadow-lg" style="background: linear-gradient(135deg, var(--primary-color), var(--accent-color)); color: white;">
+            <div class="card-body p-5 text-center">
+                <i class="bi bi-envelope-heart" style="font-size: 4rem; opacity: 0.9;"></i>
+                <h2 class="h3 mt-4 mb-3">Never Miss an Update</h2>
+                <p class="lead mb-4">Subscribe to our newsletter for the latest articles, tips, and company news</p>
+                <form class="row g-3 justify-content-center">
+                    <div class="col-auto" style="min-width: 350px;">
+                        <input type="email" class="form-control form-control-lg" placeholder="your@email.com" required>
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-light btn-lg">
+                            <i class="bi bi-send me-2"></i>Subscribe
+                        </button>
+                    </div>
+                </form>
+                <small class="d-block mt-3 opacity-75">
+                    <i class="bi bi-lock me-1"></i>We respect your privacy. Unsubscribe anytime.
+                </small>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

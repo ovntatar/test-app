@@ -1,0 +1,214 @@
+<!-- app/templates/contact.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .contact-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 60px 0;
+        margin: -2rem -15px 3rem;
+        border-radius: 20px;
+    }
+    
+    .contact-card {
+        padding: 2rem;
+        border-radius: 15px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        height: 100%;
+        text-align: center;
+    }
+    
+    .contact-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        margin: 0 auto 1rem;
+    }
+</style>
+
+<!-- Hero -->
+<section class="contact-hero">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-3">Contact Us</h1>
+        <p class="lead">We'd love to hear from you</p>
+    </div>
+</section>
+
+<!-- Contact Options -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row g-4 mb-5">
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-envelope"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Email Us</h3>
+                    <p class="text-muted mb-3">
+                        General inquiries and support
+                    </p>
+                    <a href="mailto:support@yourapp.com" class="btn btn-outline-primary">
+                        support@yourapp.com
+                    </a>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-chat-dots"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Live Chat</h3>
+                    <p class="text-muted mb-3">
+                        Available 24/7 for instant help
+                    </p>
+                    <button class="btn btn-outline-primary" onclick="alert('Chat widget would open here')">
+                        Start Chat
+                    </button>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="contact-card">
+                    <div class="contact-icon">
+                        <i class="bi bi-telephone"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Call Us</h3>
+                    <p class="text-muted mb-3">
+                        Monday - Friday, 9AM - 6PM EST
+                    </p>
+                    <a href="tel:+15551234567" class="btn btn-outline-primary">
+                        +1 (555) 123-4567
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Form -->
+<section class="py-5 bg-light" style="margin: 0 -15px; border-radius: 20px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-5">
+                        <h2 class="h3 mb-4 text-center">Send Us a Message</h2>
+                        
+                        <form method="POST" novalidate>
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label for="name" class="form-label">Your Name *</label>
+                                    <input type="text" class="form-control" id="name" name="name" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="email" class="form-label">Email Address *</label>
+                                    <input type="email" class="form-control" id="email" name="email" required>
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="phone" class="form-label">Phone Number</label>
+                                    <input type="tel" class="form-control" id="phone" name="phone">
+                                </div>
+                                
+                                <div class="col-md-6">
+                                    <label for="subject" class="form-label">Subject *</label>
+                                    <select class="form-select" id="subject" name="subject" required>
+                                        <option value="">Choose...</option>
+                                        <option value="support">Technical Support</option>
+                                        <option value="sales">Sales Inquiry</option>
+                                        <option value="billing">Billing Question</option>
+                                        <option value="partnership">Partnership</option>
+                                        <option value="other">Other</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <label for="message" class="form-label">Message *</label>
+                                    <textarea class="form-control" id="message" name="message" rows="6" required></textarea>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="checkbox" id="subscribe" name="subscribe">
+                                        <label class="form-check-label" for="subscribe">
+                                            Subscribe to our newsletter for updates and tips
+                                        </label>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-12">
+                                    <button type="submit" class="btn btn-action btn-lg w-100">
+                                        <i class="bi bi-send me-2"></i>Send Message
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Office Locations -->
+<section class="py-5 mt-5">
+    <div class="container">
+        <h2 class="h3 text-center mb-5">Our Offices</h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="contact-icon mb-3">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h4 class="mb-2">San Francisco</h4>
+                    <p class="text-muted">
+                        123 Market Street<br>
+                        San Francisco, CA 94102<br>
+                        United States
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="contact-icon mb-3">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h4 class="mb-2">London</h4>
+                    <p class="text-muted">
+                        456 Oxford Street<br>
+                        London W1C 1AP<br>
+                        United Kingdom
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="contact-icon mb-3">
+                        <i class="bi bi-geo-alt"></i>
+                    </div>
+                    <h4 class="mb-2">Berlin</h4>
+                    <p class="text-muted">
+                        789 Friedrichstraße<br>
+                        10117 Berlin<br>
+                        Germany
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+

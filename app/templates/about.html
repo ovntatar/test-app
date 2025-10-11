@@ -1,9 +1,677 @@
 {% extends "base.html" %}
 {% block content %}
-<div class="card shadow-sm">
-  <div class="card-body">
-    <h1 class="h4 mb-3">About</h1>
-    <p>Scalable Flask starter with blueprints, auth, Bootstrap, API, and account management.</p>
-  </div>
-</div>
+
+<style>
+    .about-hero {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        padding: 100px 0;
+        margin: -2rem -15px 3rem;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+    }
+    
+    .about-hero::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+        opacity: 0.2;
+    }
+    
+    .about-hero-content {
+        position: relative;
+        z-index: 1;
+    }
+    
+    .mission-card {
+        padding: 3rem;
+        border-radius: 20px;
+        background: white;
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        height: 100%;
+        transition: all 0.3s ease;
+    }
+    
+    .mission-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12);
+    }
+    
+    .mission-icon {
+        width: 90px;
+        height: 90px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 20px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.5rem;
+        color: white;
+        margin-bottom: 1.5rem;
+    }
+    
+    .value-card {
+        padding: 2.5rem;
+        border-radius: 20px;
+        background: white;
+        border: 2px solid #e0e0e0;
+        height: 100%;
+        transition: all 0.3s ease;
+        text-align: center;
+    }
+    
+    .value-card:hover {
+        border-color: var(--primary-color);
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.15);
+    }
+    
+    .value-icon {
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        color: white;
+        margin: 0 auto 1.5rem;
+    }
+    
+    .team-member {
+        text-align: center;
+        padding: 2rem;
+        border-radius: 15px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+    }
+    
+    .team-member:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        border-color: var(--primary-color);
+    }
+    
+    .team-avatar {
+        width: 150px;
+        height: 150px;
+        border-radius: 50%;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 3.5rem;
+        color: white;
+        margin: 0 auto 1.5rem;
+        border: 5px solid white;
+        box-shadow: 0 10px 30px rgba(0, 102, 204, 0.2);
+    }
+    
+    .stats-section {
+        background: linear-gradient(135deg, var(--dark-bg) 0%, #16213e 100%);
+        color: white;
+        padding: 80px 0;
+        margin: 0 -15px;
+        border-radius: 20px;
+    }
+    
+    .stat-card {
+        text-align: center;
+        padding: 2rem;
+    }
+    
+    .stat-number {
+        font-size: 4rem;
+        font-weight: 700;
+        background: linear-gradient(135deg, var(--accent-color), #00f2fe);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        margin-bottom: 0.5rem;
+    }
+    
+    .timeline-section {
+        position: relative;
+        padding: 3rem 0;
+    }
+    
+    .timeline-item {
+        position: relative;
+        padding-left: 80px;
+        margin-bottom: 3rem;
+    }
+    
+    .timeline-dot {
+        position: absolute;
+        left: 20px;
+        top: 0;
+        width: 40px;
+        height: 40px;
+        background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: white;
+        font-weight: bold;
+        box-shadow: 0 5px 20px rgba(0, 102, 204, 0.3);
+    }
+    
+    .timeline-item:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        left: 39px;
+        top: 40px;
+        bottom: -50px;
+        width: 2px;
+        background: linear-gradient(to bottom, var(--primary-color), transparent);
+    }
+</style>
+
+<!-- Hero -->
+<section class="about-hero">
+    <div class="container about-hero-content text-center">
+        <h1 class="display-2 fw-bold mb-4">About YourApp</h1>
+        <p class="lead mb-4" style="font-size: 1.3rem; max-width: 800px; margin: 0 auto;">
+            We're building the future of business management software. 
+            Our mission is to help companies of all sizes work smarter, grow faster, and achieve more.
+        </p>
+        <div class="d-flex gap-3 justify-content-center mt-5">
+            <a href="{{ url_for('main.careers') }}" class="btn btn-light btn-lg">
+                Join Our Team
+            </a>
+            <a href="{{ url_for('main.contact') }}" class="btn btn-outline-light btn-lg">
+                Get in Touch
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Mission & Vision -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-6">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="bi bi-bullseye"></i>
+                    </div>
+                    <h2 class="h3 mb-3">Our Mission</h2>
+                    <p class="lead text-muted">
+                        To empower businesses worldwide with innovative, intuitive, and powerful tools 
+                        that simplify complex operations and drive sustainable growth.
+                    </p>
+                    <p class="text-muted">
+                        We believe that great software should be accessible to everyone, not just large enterprises. 
+                        That's why we've built a platform that scales with your business, from startup to enterprise.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-lg-6">
+                <div class="mission-card">
+                    <div class="mission-icon">
+                        <i class="bi bi-eye"></i>
+                    </div>
+                    <h2 class="h3 mb-3">Our Vision</h2>
+                    <p class="lead text-muted">
+                        A world where every business, regardless of size, has access to world-class 
+                        management tools that help them thrive in the digital age.
+                    </p>
+                    <p class="text-muted">
+                        We're committed to continuous innovation, listening to our customers, and building 
+                        features that truly make a difference in how businesses operate every day.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Our Story -->
+<section class="mb-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="display-5 fw-bold mb-4">Our Story</h2>
+                <p class="lead mb-4">
+                    Founded in 2020 by a team of frustrated business owners and developers, 
+                    YourApp started with a simple observation: business software shouldn't be complicated.
+                </p>
+                <p class="mb-4">
+                    We saw companies spending countless hours wrestling with outdated, bloated software 
+                    that was supposed to help them, not hinder them. We knew there had to be a better way.
+                </p>
+                <p class="mb-4">
+                    Today, we serve over 50,000 businesses across 150 countries. Our team of 200+ passionate 
+                    professionals works tirelessly to build the best platform on the market. But we're just 
+                    getting started.
+                </p>
+                <p class="text-muted">
+                    Every feature we build, every decision we make, starts with one question: 
+                    "Does this make our customers' lives easier?"
+                </p>
+            </div>
+            <div class="col-lg-6">
+                <div class="bg-light rounded-4 p-5 text-center">
+                    <i class="bi bi-rocket-takeoff" style="font-size: 12rem; color: var(--primary-color); opacity: 0.2;"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Timeline -->
+<section class="py-5 bg-light" style="margin: 0 -15px; border-radius: 20px;">
+    <div class="container">
+        <h2 class="display-5 fw-bold text-center mb-5">Our Journey</h2>
+        <div class="timeline-section">
+            <div class="timeline-item">
+                <div class="timeline-dot">20</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">2020 - The Beginning</h4>
+                        <p class="text-muted mb-0">
+                            YourApp founded by Jane Doe and John Smith. First version launched with 100 beta users.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">21</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">2021 - Series A Funding</h4>
+                        <p class="text-muted mb-0">
+                            Raised $10M Series A, reached 5,000 customers, and expanded team to 50 people.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">22</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">2022 - Global Expansion</h4>
+                        <p class="text-muted mb-0">
+                            Opened offices in London and Berlin. Launched in 50+ countries with multi-language support.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">23</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">2023 - Enterprise Launch</h4>
+                        <p class="text-muted mb-0">
+                            Introduced Enterprise plan with advanced security features. Reached 25,000 customers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">24</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">2024 - Series B & AI Features</h4>
+                        <p class="text-muted mb-0">
+                            Raised $50M Series B. Launched AI-powered analytics and reached 50,000+ customers worldwide.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="timeline-item">
+                <div class="timeline-dot">25</div>
+                <div class="card border-0 shadow-sm">
+                    <div class="card-body p-4">
+                        <h4 class="mb-2">2025 - The Future</h4>
+                        <p class="text-muted mb-0">
+                            Expanding to new markets, launching mobile apps, and continuing to innovate for our customers.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Core Values -->
+<section class="py-5 mt-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Our Core Values</h2>
+            <p class="lead text-muted">The principles that guide everything we do</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-heart-fill"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Customer First</h3>
+                    <p class="text-muted">
+                        Every decision starts with how it benefits our customers. Their success is our success.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-lightbulb-fill"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Innovation</h3>
+                    <p class="text-muted">
+                        We constantly push boundaries and challenge the status quo to build better solutions.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-shield-check"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Trust</h3>
+                    <p class="text-muted">
+                        We earn trust through transparency, reliability, and always doing the right thing.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-people-fill"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Teamwork</h3>
+                    <p class="text-muted">
+                        Together we achieve more. We support each other and celebrate shared victories.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-speedometer"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Excellence</h3>
+                    <p class="text-muted">
+                        We set high standards and continuously improve. Good enough is never good enough.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-globe"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Diversity</h3>
+                    <p class="text-muted">
+                        Different perspectives make us stronger. We celebrate diversity in all its forms.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-tree"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Sustainability</h3>
+                    <p class="text-muted">
+                        We're committed to building a sustainable business that's good for people and planet.
+                    </p>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="value-card">
+                    <div class="value-icon">
+                        <i class="bi bi-emoji-smile"></i>
+                    </div>
+                    <h3 class="h5 mb-3">Fun</h3>
+                    <p class="text-muted">
+                        Work should be enjoyable. We create an environment where people love what they do.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Stats -->
+<section class="stats-section my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+                <div class="stat-card">
+                    <div class="stat-number">200+</div>
+                    <p class="lead mb-0">Team Members</p>
+                    <small class="text-white-50">Across 3 continents</small>
+                </div>
+            </div>
+            <div class="col-md-3 col-6 mb-4 mb-md-0">
+                <div class="stat-card">
+                    <div class="stat-number">50K+</div>
+                    <p class="lead mb-0">Customers</p>
+                    <small class="text-white-50">And growing every day</small>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <div class="stat-number">150+</div>
+                    <p class="lead mb-0">Countries</p>
+                    <small class="text-white-50">Worldwide reach</small>
+                </div>
+            </div>
+            <div class="col-md-3 col-6">
+                <div class="stat-card">
+                    <div class="stat-number">99.9%</div>
+                    <p class="lead mb-0">Uptime</p>
+                    <small class="text-white-50">Guaranteed reliability</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Leadership Team -->
+<section class="py-5">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="display-5 fw-bold mb-3">Meet Our Leadership</h2>
+            <p class="lead text-muted">The team driving our vision forward</p>
+        </div>
+        
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">JD</div>
+                    <h4 class="mb-1">Jane Doe</h4>
+                    <p class="text-primary mb-2">CEO & Co-Founder</p>
+                    <p class="text-muted small mb-3">
+                        15+ years in SaaS. Previously VP at TechCorp. Stanford MBA.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">JS</div>
+                    <h4 class="mb-1">John Smith</h4>
+                    <p class="text-primary mb-2">CTO & Co-Founder</p>
+                    <p class="text-muted small mb-3">
+                        20+ years engineering. Ex-Google. MIT Computer Science.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">SK</div>
+                    <h4 class="mb-1">Sarah Kim</h4>
+                    <p class="text-primary mb-2">VP of Product</p>
+                    <p class="text-muted small mb-3">
+                        Product leader with 12+ years experience. Ex-Salesforce.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-twitter"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-3">
+                <div class="team-member">
+                    <div class="team-avatar">MP</div>
+                    <h4 class="mb-1">Michael Park</h4>
+                    <p class="text-primary mb-2">VP of Engineering</p>
+                    <p class="text-muted small mb-3">
+                        Engineering leader. Built systems at scale. Carnegie Mellon.
+                    </p>
+                    <div class="d-flex justify-content-center gap-2">
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-linkedin"></i>
+                        </a>
+                        <a href="#" class="btn btn-sm btn-outline-primary rounded-circle" style="width: 38px; height: 38px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                            <i class="bi bi-github"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Culture -->
+<section class="py-5 bg-light" style="margin: 0 -15px; border-radius: 20px;">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h2 class="display-5 fw-bold mb-4">Our Culture</h2>
+                <p class="lead mb-4">
+                    We've built a culture where people love to work, grow, and make an impact.
+                </p>
+                <ul class="list-unstyled">
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-3 mt-1" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>Remote-First</strong>
+                            <p class="text-muted mb-0">Work from anywhere with flexible hours</p>
+                        </div>
+                    </li>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-3 mt-1" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>Learning & Growth</strong>
+                            <p class="text-muted mb-0">Annual learning budget and mentorship programs</p>
+                        </div>
+                    </li>
+                    <li class="mb-3 d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-3 mt-1" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>Work-Life Balance</strong>
+                            <p class="text-muted mb-0">Generous PTO and wellness benefits</p>
+                        </div>
+                    </li>
+                    <li class="d-flex align-items-start">
+                        <i class="bi bi-check-circle-fill text-success me-3 mt-1" style="font-size: 1.5rem;"></i>
+                        <div>
+                            <strong>Impact & Ownership</strong>
+                            <p class="text-muted mb-0">Make real decisions and see your impact</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-lg-6">
+                <div class="row g-3">
+                    <div class="col-6">
+                        <div class="bg-white rounded-3 p-4 text-center shadow-sm">
+                            <i class="bi bi-trophy-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <h5 class="mt-3 mb-1">Best Place to Work</h5>
+                            <small class="text-muted">TechCrunch 2024</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-white rounded-3 p-4 text-center shadow-sm">
+                            <i class="bi bi-star-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <h5 class="mt-3 mb-1">4.8/5 Rating</h5>
+                            <small class="text-muted">Glassdoor</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-white rounded-3 p-4 text-center shadow-sm">
+                            <i class="bi bi-tree-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <h5 class="mt-3 mb-1">Carbon Neutral</h5>
+                            <small class="text-muted">Since 2022</small>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="bg-white rounded-3 p-4 text-center shadow-sm">
+                            <i class="bi bi-heart-fill" style="font-size: 3rem; color: var(--primary-color);"></i>
+                            <h5 class="mt-3 mb-1">95% Retention</h5>
+                            <small class="text-muted">Employee Rate</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- CTA -->
+<section class="py-5 mt-5">
+    <div class="container text-center">
+        <h2 class="display-5 fw-bold mb-4">Want to Join Us?</h2>
+        <p class="lead text-muted mb-4">
+            We're always looking for talented people who share our passion for building great products
+        </p>
+        <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="{{ url_for('main.careers') }}" class="btn btn-action btn-lg">
+                <i class="bi bi-briefcase me-2"></i>View Open Positions
+            </a>
+            <a href="{{ url_for('main.contact') }}" class="btn btn-outline-primary btn-lg">
+                <i class="bi bi-envelope me-2"></i>Get in Touch
+            </a>
+        </div>
+    </div>
+</section>
+
 {% endblock %}

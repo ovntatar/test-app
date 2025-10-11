@@ -1,0 +1,14 @@
+app/templates/features.html 
+app/templates/company.html 
+app/templates/careers.html 
+app/templates/blog.html 
+app/templates/press.html 
+app/templates/support.html 
+app/templates/help.html 
+app/templates/documentation.html 
+app/templates/contact.html 
+app/templates/status.html 
+app/templates/legal/impressum.html 
+app/templates/legal/agb.html 
+app/templates/legal/privacy.html 
+app/templates/legal/terms.html 

@@ -1,0 +1,558 @@
+{% extends "base.html" %}
+{% block content %}
+   <style>
+        :root {
+            --primary-color: #0066cc;
+            --secondary-color: #004999;
+            --accent-color: #00a3ff;
+            --dark-bg: #1a1a2e;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 80px 0 60px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><defs><pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse"><path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.1)" stroke-width="1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            opacity: 0.3;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark-bg);
+        }
+
+        .card {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            height: 100%;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+        }
+
+        .stat-box {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .press-kit-btn {
+            background: var(--primary-color);
+            color: white;
+            padding: 1rem 2.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            border: none;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .press-kit-btn:hover {
+            background: var(--secondary-color);
+            color: white;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(0, 102, 204, 0.3);
+        }
+
+        .logo-showcase {
+            background: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .logo-item {
+            margin: 2rem;
+            display: inline-block;
+        }
+
+        .timeline-item {
+            padding-left: 3rem;
+            position: relative;
+            margin-bottom: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary-color);
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            left: 9px;
+            top: 20px;
+            width: 2px;
+            height: calc(100% + 2rem);
+            background: #dee2e6;
+        }
+
+        .timeline-item:last-child::after {
+            display: none;
+        }
+
+        .contact-card {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .badge-custom {
+            background: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-weight: 600;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .media-mention {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--primary-color);
+        }
+
+        .download-asset {
+            text-align: center;
+            padding: 2rem;
+            background: #f8f9fa;
+            border-radius: 10px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .download-asset:hover {
+            background: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .download-asset i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .section-title {
+                font-size: 1.8rem;
+            }
+            .stat-number {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <div class="container hero-content">
+            <div class="text-center">
+                <div class="badge-custom mb-3">
+                    <i class="bi bi-newspaper me-2"></i>Press & Media Center
+                </div>
+                <h1 class="display-3 fw-bold mb-4">Press & Media Resources</h1>
+                <p class="lead mb-4" style="font-size: 1.3rem; opacity: 0.95;">
+                    Everything you need to cover YourApp: press releases, logos, screenshots, and more
+                </p>
+                <a href="#press-kit" class="press-kit-btn">
+                    <i class="bi bi-download me-2"></i>Download Press Kit
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Stats -->
+    <section class="py-5 mt-n5" style="position: relative; z-index: 10;">
+        <div class="container">
+            <div class="row g-4">
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">50K+</div>
+                        <div class="text-muted">Active Users</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">150+</div>
+                        <div class="text-muted">Countries</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">98%</div>
+                        <div class="text-muted">Satisfaction</div>
+                    </div>
+                </div>
+                <div class="col-md-3 col-6">
+                    <div class="stat-box">
+                        <div class="stat-number">2025</div>
+                        <div class="text-muted">Founded</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <h2 class="section-title text-center mb-4">About YourApp</h2>
+                    <div class="card p-4">
+                        <p class="lead">
+                            YourApp is a leading business solutions platform that empowers companies worldwide to streamline operations, manage teams, and scale effectively. Founded in 2025, we serve over 50,000 active users across 150+ countries.
+                        </p>
+                        <p>
+                            Our mission is to provide professional-grade tools that are accessible, intuitive, and powerful. From startups to enterprises, YourApp delivers the features and reliability that modern businesses demand.
+                        </p>
+                        <hr class="my-4">
+                        <div class="row text-center">
+                            <div class="col-md-4">
+                                <i class="bi bi-shield-check text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="mt-2">Secure</h5>
+                                <p class="text-muted small">Bank-level encryption</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-lightning-charge text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="mt-2">Fast</h5>
+                                <p class="text-muted small">99.9% uptime</p>
+                            </div>
+                            <div class="col-md-4">
+                                <i class="bi bi-people text-primary" style="font-size: 2rem;"></i>
+                                <h5 class="mt-2">Collaborative</h5>
+                                <p class="text-muted small">Team-focused features</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Recent News -->
+    <section class="py-5 bg-light">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Latest News & Announcements</h2>
+            <div class="row g-4">
+                <div class="col-lg-6">
+                    <div class="card p-4">
+                        <span class="badge bg-primary mb-2" style="width: fit-content;">October 11, 2025</span>
+                        <h4>YourApp Launches API Key Management</h4>
+                        <p class="text-muted">
+                            New feature enables developers to securely manage programmatic access with advanced API key controls and monitoring.
+                        </p>
+                        <a href="#" class="text-primary fw-semibold">Read full release <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card p-4">
+                        <span class="badge bg-primary mb-2" style="width: fit-content;">October 1, 2025</span>
+                        <h4>50,000 Users Milestone Reached</h4>
+                        <p class="text-muted">
+                            YourApp celebrates reaching 50,000 active users across 150 countries, marking significant growth in enterprise adoption.
+                        </p>
+                        <a href="#" class="text-primary fw-semibold">Read full release <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card p-4">
+                        <span class="badge bg-primary mb-2" style="width: fit-content;">September 15, 2025</span>
+                        <h4>Multi-Language Support Now Available</h4>
+                        <p class="text-muted">
+                            Platform now supports English and German with more languages coming soon, expanding global accessibility.
+                        </p>
+                        <a href="#" class="text-primary fw-semibold">Read full release <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="card p-4">
+                        <span class="badge bg-primary mb-2" style="width: fit-content;">September 1, 2025</span>
+                        <h4>Enterprise Plan Introduced</h4>
+                        <p class="text-muted">
+                            New Enterprise tier offers dedicated support, custom integrations, and unlimited resources for large organizations.
+                        </p>
+                        <a href="#" class="text-primary fw-semibold">Read full release <i class="bi bi-arrow-right ms-1"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Coverage -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Media Coverage</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="media-mention">
+                        <p class="mb-2"><strong>TechCrunch</strong> • October 2025</p>
+                        <p class="mb-0 text-muted">"YourApp is revolutionizing how businesses manage their operations with an intuitive, powerful platform."</p>
+                    </div>
+                    <div class="media-mention">
+                        <p class="mb-2"><strong>VentureBeat</strong> • September 2025</p>
+                        <p class="mb-0 text-muted">"A game-changer for small to medium businesses looking for enterprise-grade tools without the complexity."</p>
+                    </div>
+                    <div class="media-mention">
+                        <p class="mb-2"><strong>Forbes</strong> • September 2025</p>
+                        <p class="mb-0 text-muted">"YourApp's focus on security and user experience sets it apart in a crowded market."</p>
+                    </div>
+                    <div class="media-mention">
+                        <p class="mb-2"><strong>The Next Web</strong> • August 2025</p>
+                        <p class="mb-0 text-muted">"With 50,000+ users and counting, YourApp is one of the fastest-growing business platforms of 2025."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Kit & Brand Assets -->
+    <section class="py-5 bg-light" id="press-kit">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Press Kit & Brand Assets</h2>
+            
+            <!-- Logos -->
+            <div class="mb-5">
+                <h3 class="h4 mb-4">Logos</h3>
+                <div class="row g-4">
+                    <div class="col-md-4">
+                        <div class="download-asset">
+                            <i class="bi bi-file-image"></i>
+                            <h5>Primary Logo</h5>
+                            <p class="text-muted small mb-3">PNG, SVG (Light & Dark)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="download-asset">
+                            <i class="bi bi-file-image"></i>
+                            <h5>Logo Mark</h5>
+                            <p class="text-muted small mb-3">PNG, SVG (Icon Only)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="download-asset">
+                            <i class="bi bi-file-image"></i>
+                            <h5>Full Logo Pack</h5>
+                            <p class="text-muted small mb-3">ZIP (All Formats)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Screenshots -->
+            <div class="mb-5">
+                <h3 class="h4 mb-4">Product Screenshots</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="download-asset">
+                            <i class="bi bi-image"></i>
+                            <h5>Dashboard View</h5>
+                            <p class="text-muted small mb-3">High-res PNG (3840x2160)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="download-asset">
+                            <i class="bi bi-image"></i>
+                            <h5>Complete Screenshot Pack</h5>
+                            <p class="text-muted small mb-3">ZIP (10+ Screenshots)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Guidelines -->
+            <div class="mb-5">
+                <h3 class="h4 mb-4">Brand Guidelines</h3>
+                <div class="row g-4">
+                    <div class="col-md-6">
+                        <div class="download-asset">
+                            <i class="bi bi-file-pdf"></i>
+                            <h5>Brand Style Guide</h5>
+                            <p class="text-muted small mb-3">PDF (Logo usage, colors, typography)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="download-asset">
+                            <i class="bi bi-file-text"></i>
+                            <h5>Company Fact Sheet</h5>
+                            <p class="text-muted small mb-3">PDF (Stats, milestones, info)</p>
+                            <button class="btn btn-outline-primary btn-sm">
+                                <i class="bi bi-download me-1"></i>Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Brand Colors -->
+            <div>
+                <h3 class="h4 mb-4">Brand Colors</h3>
+                <div class="card p-4">
+                    <div class="row text-center">
+                        <div class="col-md-3 col-6 mb-3">
+                            <div style="width: 100%; height: 100px; background: #0066cc; border-radius: 10px; margin-bottom: 1rem;"></div>
+                            <strong>Primary</strong><br>
+                            <span class="text-muted small">#0066CC</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div style="width: 100%; height: 100px; background: #004999; border-radius: 10px; margin-bottom: 1rem;"></div>
+                            <strong>Secondary</strong><br>
+                            <span class="text-muted small">#004999</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div style="width: 100%; height: 100px; background: #00a3ff; border-radius: 10px; margin-bottom: 1rem;"></div>
+                            <strong>Accent</strong><br>
+                            <span class="text-muted small">#00A3FF</span>
+                        </div>
+                        <div class="col-md-3 col-6 mb-3">
+                            <div style="width: 100%; height: 100px; background: #1a1a2e; border-radius: 10px; margin-bottom: 1rem;"></div>
+                            <strong>Dark</strong><br>
+                            <span class="text-muted small">#1A1A2E</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Timeline -->
+    <section class="py-5">
+        <div class="container">
+            <h2 class="section-title text-center mb-5">Company Timeline</h2>
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="timeline-item">
+                        <h5>October 2025</h5>
+                        <p class="text-muted">Reached 50,000+ active users milestone across 150 countries</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>September 2025</h5>
+                        <p class="text-muted">Launched Enterprise plan and multi-language support (EN/DE)</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>August 2025</h5>
+                        <p class="text-muted">Introduced API key management and advanced developer tools</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>June 2025</h5>
+                        <p class="text-muted">Secured Series A funding to accelerate global expansion</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>March 2025</h5>
+                        <p class="text-muted">Reached 10,000 active users, expanded to 50+ countries</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h5>January 2025</h5>
+                        <p class="text-muted">YourApp officially launched with Pro and Free plans</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Contact -->
+    <section class="py-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto">
+                    <div class="contact-card">
+                        <h2 class="mb-4">Press & Media Inquiries</h2>
+                        <p class="lead mb-4">
+                            For press inquiries, interview requests, or additional information, please contact our media team.
+                        </p>
+                        <div class="row text-start">
+                            <div class="col-md-6 mb-3">
+                                <h5><i class="bi bi-envelope me-2"></i>Email</h5>
+                                <a href="mailto:press@yourapp.com" class="text-white">press@yourapp.com</a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h5><i class="bi bi-telephone me-2"></i>Phone</h5>
+                                <a href="tel:+4912345678" class="text-white">+49 123 456 78</a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h5><i class="bi bi-twitter me-2"></i>Twitter</h5>
+                                <a href="https://twitter.com/yourapp" class="text-white">@YourApp</a>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <h5><i class="bi bi-linkedin me-2"></i>LinkedIn</h5>
+                                <a href="https://linkedin.com/company/yourapp" class="text-white">YourApp</a>
+                            </div>
+                        </div>
+                        <hr class="my-4" style="border-color: rgba(255,255,255,0.3);">
+                        <p class="mb-0">
+                            <strong>Media Contact:</strong> Sarah Johnson, Head of Communications<br>
+                            <strong>Response Time:</strong> We typically respond within 24 hours
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+{% endblock %}
+

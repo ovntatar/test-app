@@ -1,0 +1,225 @@
+<!-- app/templates/help.html -->
+{% extends "base.html" %}
+{% block content %}
+
+<style>
+    .help-hero {
+        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        color: white;
+        padding: 60px 0;
+        margin: -2rem -15px 3rem;
+        border-radius: 20px;
+    }
+    
+    .help-category {
+        padding: 2rem;
+        border-radius: 15px;
+        background: white;
+        border: 1px solid #e0e0e0;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .help-category:hover {
+        border-color: var(--primary-color);
+        box-shadow: 0 5px 20px rgba(0, 102, 204, 0.15);
+    }
+    
+    .article-list {
+        list-style: none;
+        padding: 0;
+    }
+    
+    .article-list li {
+        padding: 0.75rem 0;
+        border-bottom: 1px solid #f0f0f0;
+    }
+    
+    .article-list li:last-child {
+        border-bottom: none;
+    }
+</style>
+
+<!-- Hero -->
+<section class="help-hero">
+    <div class="container text-center">
+        <h1 class="display-3 fw-bold mb-3">Help Center</h1>
+        <p class="lead mb-4">Find answers to your questions</p>
+        <div class="row justify-content-center">
+            <div class="col-lg-6">
+                <div class="input-group input-group-lg">
+                    <input type="text" class="form-control" placeholder="What can we help you with?">
+                    <button class="btn btn-light" type="button">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Categories -->
+<section class="mb-5">
+    <div class="container">
+        <h2 class="h3 mb-4">Browse by Category</h2>
+        <div class="row g-4">
+            <div class="col-md-6 col-lg-4">
+                <div class="help-category">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-primary text-white d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-rocket-takeoff"></i>
+                        </div>
+                        <h3 class="h5 mb-0">Getting Started</h3>
+                    </div>
+                    <p class="text-muted mb-3">Learn the basics and set up your account</p>
+                    <small class="text-primary">24 articles →</small>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="help-category">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-success text-white d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-person-gear"></i>
+                        </div>
+                        <h3 class="h5 mb-0">Account Settings</h3>
+                    </div>
+                    <p class="text-muted mb-3">Manage your profile and preferences</p>
+                    <small class="text-success">18 articles →</small>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="help-category">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-warning text-white d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-credit-card"></i>
+                        </div>
+                        <h3 class="h5 mb-0">Billing & Plans</h3>
+                    </div>
+                    <p class="text-muted mb-3">Payment, invoices, and subscriptions</p>
+                    <small class="text-warning">15 articles →</small>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="help-category">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-info text-white d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-diagram-3"></i>
+                        </div>
+                        <h3 class="h5 mb-0">Integrations</h3>
+                    </div>
+                    <p class="text-muted mb-3">Connect with your favorite tools</p>
+                    <small class="text-info">32 articles →</small>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="help-category">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-danger text-white d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-shield-lock"></i>
+                        </div>
+                        <h3 class="h5 mb-0">Security</h3>
+                    </div>
+                    <p class="text-muted mb-3">Keep your account safe and secure</p>
+                    <small class="text-danger">12 articles →</small>
+                </div>
+            </div>
+            
+            <div class="col-md-6 col-lg-4">
+                <div class="help-category">
+                    <div class="d-flex align-items-center mb-3">
+                        <div class="rounded-circle bg-secondary text-white d-flex align-items-center justify-content-center me-3" 
+                             style="width: 50px; height: 50px;">
+                            <i class="bi bi-question-circle"></i>
+                        </div>
+                        <h3 class="h5 mb-0">Troubleshooting</h3>
+                    </div>
+                    <p class="text-muted mb-3">Solve common issues and problems</p>
+                    <small class="text-secondary">28 articles →</small>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Popular Articles -->
+<section class="py-5 bg-light" style="margin: 0 -15px; border-radius: 20px;">
+    <div class="container">
+        <h2 class="h3 mb-4">Popular Articles</h2>
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="card border-0">
+                    <div class="card-body p-4">
+                        <ul class="article-list">
+                            <li>
+                                <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>How to create your first project</strong>
+                                        <p class="text-muted mb-0 small">Step-by-step guide to getting started</p>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>Managing API keys</strong>
+                                        <p class="text-muted mb-0 small">Create, regenerate, and delete API keys</p>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>Changing your plan</strong>
+                                        <p class="text-muted mb-0 small">Upgrade or downgrade your subscription</p>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>Setting up two-factor authentication</strong>
+                                        <p class="text-muted mb-0 small">Add an extra layer of security</p>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="text-decoration-none d-flex justify-content-between align-items-center">
+                                    <div>
+                                        <strong>Understanding webhooks</strong>
+                                        <p class="text-muted mb-0 small">Configure real-time event notifications</p>
+                                    </div>
+                                    <i class="bi bi-chevron-right text-muted"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Contact CTA -->
+<section class="py-5 mt-5">
+    <div class="container text-center">
+        <h2 class="h3 mb-3">Can't Find What You're Looking For?</h2>
+        <p class="lead text-muted mb-4">Our support team is ready to help</p>
+        <a href="{{ url_for('main.contact') }}" class="btn btn-action btn-lg">Contact Support</a>
+    </div>
+</section>
+
+{% endblock %}
+
