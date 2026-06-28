@@ -119,4 +119,7 @@ def create_app(config_class=None):
         with app.app_context():
             db.create_all()
 
+    from .cli import cli as cli_group
+    app.cli.add_command(cli_group)
+
     return app
